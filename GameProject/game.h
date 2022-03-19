@@ -18,7 +18,7 @@ public:
 		return isRunning;
 	}
 	static SDL_Renderer* renderer;
-	
+	static SDL_Event e;
 private:
 	bool isRunning;
 	SDL_Window* window;

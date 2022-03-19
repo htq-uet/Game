@@ -144,22 +144,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="main .cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="TextureManage.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="ColliderComponent.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="ECS.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="KeyboardController.h" />
+    <ClInclude Include="KeyboardController2.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="PositionComponent.h" />
+    <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="TextureManage.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
