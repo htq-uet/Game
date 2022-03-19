@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main .cpp" />
@@ -150,9 +151,14 @@
     <ClCompile Include="TextureManage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Components.h" />
+    <ClInclude Include="ECS.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="PositionComponent.h" />
     <ClInclude Include="TextureManage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
