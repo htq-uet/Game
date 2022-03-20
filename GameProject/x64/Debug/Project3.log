@@ -1,23 +1,14 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(514,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Project3.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   game.cpp
-C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(31,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(32,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\ECS.h(69,28): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(29,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(30,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\game.cpp(94,61): warning C4305: 'argument': truncation from 'double' to 'const float'
+C:\Users\84942\source\repos\Project2\GameProject\ECS.h(70,28): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Users\84942\source\repos\Project2\GameProject\game.cpp(48): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,int,int>(int &&,int &&)' being compiled
-          with
-          [
-              T=TransformComponent
-          ]
-C:\Users\84942\source\repos\Project2\GameProject\ECS.h(69,28): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-C:\Users\84942\source\repos\Project2\GameProject\game.cpp(59): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,float,float,int,int,int>(float &&,float &&,int &&,int &&,int &&)' being compiled
+C:\Users\84942\source\repos\Project2\GameProject\game.cpp(60): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,int,int>(int &&,int &&)' being compiled
           with
           [
               T=TransformComponent

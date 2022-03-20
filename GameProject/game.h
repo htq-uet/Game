@@ -3,8 +3,10 @@
 #include "SDL.h"
 #include <iostream>
 #include <SDL_image.h>
-
+#include <vector>
 using namespace std;
+class ColliderComponent;
+
 class Game {
 public:
 	Game();
@@ -19,6 +21,7 @@ public:
 	}
 	static SDL_Renderer* renderer;
 	static SDL_Event e;
+	static vector<ColliderComponent*> colliders;
 private:
 	bool isRunning;
 	SDL_Window* window;

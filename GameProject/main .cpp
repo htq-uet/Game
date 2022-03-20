@@ -7,7 +7,7 @@ int main(int args, char* argv[]) {
 	Uint32 frameStart;
 	int frameTime;
 	gem = new Game();
-	gem->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+	gem->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1760, 960, false);
 	while (gem->running()) {
 		frameStart = SDL_GetTicks();
 		gem->handleEvents();
