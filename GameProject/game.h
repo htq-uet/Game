@@ -19,11 +19,14 @@ public:
 	bool running() {
 		return isRunning;
 	}
+
+	static void addTile(int id, int x, int y );
 	static SDL_Renderer* renderer;
 	static SDL_Event e;
+	static bool isRunning;
 	static vector<ColliderComponent*> colliders;
 private:
-	bool isRunning;
+	
 	SDL_Window* window;
 	
 };

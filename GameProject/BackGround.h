@@ -8,6 +8,7 @@ public:
 	void DrawBackGround();
 private:
 	SDL_Rect src, dest;
+	SDL_RendererFlip flip;
 
 	SDL_Texture* background;
 
