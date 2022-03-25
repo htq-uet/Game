@@ -17,8 +17,8 @@ public:
 		if (Game::e.type == SDL_KEYDOWN) {
 			switch (Game::e.key.keysym.sym)
 			{
-			case SDLK_w: 
-				transform->velocity.y = -1;
+			case SDLK_w:
+				transform->velocity.y =-1;
 				sprite->play("Walk");
 				break;
 
@@ -45,7 +45,6 @@ public:
 			{ 
 			case SDLK_w:
 				transform->velocity.y = 0;
-				sprite->play("Idle");
 				break;
 			case SDLK_a:
 				transform->velocity.x = 0;
@@ -53,7 +52,6 @@ public:
 				break;
 			case SDLK_s:
 				transform->velocity.y = 0;
-				sprite->play("Idle");
 				
 				break;
 			case SDLK_d:
@@ -61,9 +59,6 @@ public:
 				sprite->play("Idle");
 				break;
 
-			case SDLK_ESCAPE:
-				Game::isRunning = false;
-				break;
 			default:
 				break;
 			}

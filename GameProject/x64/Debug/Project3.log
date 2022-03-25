@@ -2,19 +2,48 @@
   Collision.cpp
 C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(29,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(30,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\ECS.h(88,28): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\84942\source\repos\Project2\GameProject\TileComponent.h(52): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,float,float,int&,int&,int>(float &&,float &&,int &,int &,int &&)' being compiled
+          with
+          [
+              T=TransformComponent
+          ]
   KeyboardController.cpp
 C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(29,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(30,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\ECS.h(88,28): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\84942\source\repos\Project2\GameProject\TileComponent.h(52): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,float,float,int&,int&,int>(float &&,float &&,int &,int &,int &&)' being compiled
+          with
+          [
+              T=TransformComponent
+          ]
   game.cpp
 C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(29,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(30,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\game.cpp(95,61): warning C4305: 'argument': truncation from 'double' to 'const float'
+C:\Users\84942\source\repos\Project2\GameProject\ECS.h(88,28): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\84942\source\repos\Project2\GameProject\TileComponent.h(52): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,float,float,int&,int&,int>(float &&,float &&,int &,int &,int &&)' being compiled
+          with
+          [
+              T=TransformComponent
+          ]
 C:\Users\84942\source\repos\Project2\GameProject\ECS.h(88,28): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Users\84942\source\repos\Project2\GameProject\game.cpp(59): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,int,int>(int &&,int &&)' being compiled
+C:\Users\84942\source\repos\Project2\GameProject\game.cpp(51): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,int,int>(int &&,int &&)' being compiled
           with
           [
               T=TransformComponent

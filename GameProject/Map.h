@@ -1,6 +1,6 @@
 #pragma once
-#include "game.h"
 #include <string>
+using namespace std;
 class Map
 {
 public:
@@ -8,6 +8,5 @@ public:
 	~Map();
 	static void LoadMap(string path,int sizeX,int sizeY);
 private:
-	
 };
 
