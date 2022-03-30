@@ -1,18 +1,15 @@
 c:\users\84942\source\repos\project2\gameproject\x64\debug\vc143.pdb
 c:\users\84942\source\repos\project2\gameproject\x64\debug\vc143.idb
-c:\users\84942\source\repos\project2\gameproject\x64\debug\vector2d.obj
-c:\users\84942\source\repos\project2\gameproject\x64\debug\texturemanage.obj
-c:\users\84942\source\repos\project2\gameproject\x64\debug\map.obj
 c:\users\84942\source\repos\project2\gameproject\x64\debug\main .obj
-c:\users\84942\source\repos\project2\gameproject\x64\debug\keyboardcontroller.obj
-c:\users\84942\source\repos\project2\gameproject\x64\debug\gameobject.obj
-c:\users\84942\source\repos\project2\gameproject\x64\debug\game.obj
-c:\users\84942\source\repos\project2\gameproject\x64\debug\ecs.obj
-c:\users\84942\source\repos\project2\gameproject\x64\debug\collision.obj
-c:\users\84942\source\repos\project2\gameproject\x64\debug\background.obj
-c:\users\84942\source\repos\project2\gameproject\x64\debug\gameproject.ilk
+c:\users\84942\source\repos\project2\gameproject\x64\debug\playerobj.obj
+c:\users\84942\source\repos\project2\gameproject\x64\debug\gamemap.obj
+c:\users\84942\source\repos\project2\gameproject\x64\debug\imptimer.obj
+c:\users\84942\source\repos\project2\gameproject\x64\debug\commonfunction.obj
+c:\users\84942\source\repos\project2\gameproject\x64\debug\baseobj.obj
 c:\users\84942\source\repos\project2\gameproject\x64\debug\gameproject.exe
+c:\users\84942\source\repos\project2\gameproject\x64\debug\gameproject.ilk
 c:\users\84942\source\repos\project2\gameproject\x64\debug\gameproject.pdb
+c:\users\84942\source\repos\project2\gameproject\x64\debug\playerobj.obj.enc
 c:\users\84942\source\repos\project2\gameproject\x64\debug\gameproject.tlog\cl.command.1.tlog
 c:\users\84942\source\repos\project2\gameproject\x64\debug\gameproject.tlog\cl.read.1.tlog
 c:\users\84942\source\repos\project2\gameproject\x64\debug\gameproject.tlog\cl.write.1.tlog

@@ -79,8 +79,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\84942\source\repos\Project2\Project2\SDL2_image-2.0.3\include;C:\Users\84942\source\repos\Project2\Project2\SDL2-2.0.8\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\84942\source\repos\Project2\Project2\SDL2_image-2.0.3\lib\x64;C:\Users\84942\source\repos\Project2\Project2\SDL2-2.0.8\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\84942\source\repos\Project2\GameProject\SDL2_ttf-2.0.18\include;C:\Users\84942\source\repos\Project2\GameProject\SDL2_mixer-2.0.4\include;C:\Users\84942\source\repos\Project2\GameProject\SDL2_image-2.0.5\include;C:\Users\84942\source\repos\Project2\GameProject\SDL2-2.0.20\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\84942\source\repos\Project2\GameProject\SDL2_ttf-2.0.18\lib\x64;C:\Users\84942\source\repos\Project2\GameProject\SDL2_image-2.0.5\lib\x64;C:\Users\84942\source\repos\Project2\GameProject\SDL2_mixer-2.0.4\lib\x64;C:\Users\84942\source\repos\Project2\GameProject\SDL2-2.0.20\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -123,7 +123,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2test.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,34 +143,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BackGround.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="ECS.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="KeyboardController.cpp" />
+    <ClCompile Include="BaseObj.cpp" />
+    <ClCompile Include="CommonFunction.cpp" />
+    <ClCompile Include="gamemap.cpp" />
+    <ClCompile Include="ImpTimer.cpp" />
     <ClCompile Include="main .cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="TextureManage.cpp" />
-    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="Player1.cpp" />
+    <ClCompile Include="Text.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="BackGround.h" />
-    <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="Components.h" />
-    <ClInclude Include="ECS.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="KeyboardController.h" />
-    <ClInclude Include="KeyboardController2.h" />
-    <ClInclude Include="SpriteComponent.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="TileComponent.h" />
-    <ClInclude Include="TransformComponent.h" />
-    <ClInclude Include="TextureManage.h" />
-    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="BaseObj.h" />
+    <ClInclude Include="CommonFunction.h" />
+    <ClInclude Include="gamemap.h" />
+    <ClInclude Include="ImpTimer.h" />
+    <ClInclude Include="Player1.h" />
+    <ClInclude Include="Text.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\background1.png" />
+    <Image Include="assets\block1.png" />
+    <Image Include="assets\block2.png" />
+    <Image Include="assets\block3.png" />
+    <Image Include="assets\player1left.png" />
+    <Image Include="assets\player1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="map1.dat.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\map\map1.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="sounds\background.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

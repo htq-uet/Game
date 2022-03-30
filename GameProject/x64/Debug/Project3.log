@@ -1,52 +1,20 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(514,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Project3.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Collision.cpp
-C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(29,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(30,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\ECS.h(88,28): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-C:\Users\84942\source\repos\Project2\GameProject\TileComponent.h(52): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,float,float,int&,int&,int>(float &&,float &&,int &,int &,int &&)' being compiled
-          with
-          [
-              T=TransformComponent
-          ]
-  KeyboardController.cpp
-C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(29,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(30,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\ECS.h(88,28): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-C:\Users\84942\source\repos\Project2\GameProject\TileComponent.h(52): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,float,float,int&,int&,int>(float &&,float &&,int &,int &,int &&)' being compiled
-          with
-          [
-              T=TransformComponent
-          ]
-  game.cpp
-C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(29,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\TransformComponent.h(30,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\ECS.h(88,28): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-C:\Users\84942\source\repos\Project2\GameProject\TileComponent.h(52): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,float,float,int&,int&,int>(float &&,float &&,int &,int &,int &&)' being compiled
-          with
-          [
-              T=TransformComponent
-          ]
-C:\Users\84942\source\repos\Project2\GameProject\ECS.h(88,28): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-C:\Users\84942\source\repos\Project2\GameProject\game.cpp(51): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,int,int>(int &&,int &&)' being compiled
-          with
-          [
-              T=TransformComponent
-          ]
-  Generating Code...
+  Player1.cpp
+C:\Users\84942\source\repos\Project2\GameProject\CommonFunction.h(38,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(91,11): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(92,11): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(176,23): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(209,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(210,39): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(212,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(213,31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(229,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(247,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(255,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(256,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(258,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(259,41): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(273,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(292,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(307,38): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Project3.vcxproj -> C:\Users\84942\source\repos\Project2\GameProject\x64\Debug\GameProject.exe
