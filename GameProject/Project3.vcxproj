@@ -148,6 +148,7 @@
     <ClCompile Include="gamemap.cpp" />
     <ClCompile Include="ImpTimer.cpp" />
     <ClCompile Include="main .cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Text.cpp" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="CommonFunction.h" />
     <ClInclude Include="gamemap.h" />
     <ClInclude Include="ImpTimer.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Text.h" />
   </ItemGroup>

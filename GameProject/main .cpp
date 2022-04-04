@@ -5,7 +5,8 @@
 #include "Player1.h"
 #include "ImpTimer.h"
 #include "Text.h"
-
+#include "Menu.h"
+#include <iostream>
 using namespace std;
 BaseObj background;
 TTF_Font *mainfont;
@@ -108,10 +109,15 @@ int main(int arcs, char* argv[]) {
 	menu_text.SetText("Hello!");
 	menu_text.LoadFont(mainfont, gscreen);
 
-
-
+	Menu menu;
 	bool quit = false;
+	if (menu.loadMenu(gscreen, mainfont) == 1)
+		quit = true;
+
+	
+
 	while (!quit) {
+		
 		fps_timer.start();
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {

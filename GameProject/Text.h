@@ -19,8 +19,10 @@ public:
 
 	void SetColor(Uint8 red, Uint8 green, Uint8 blue);
 	void SetColor(int color);
+	
 	void RenderText(SDL_Renderer* renderer, int xpos, int ypos, SDL_Rect* clip=NULL,double angle = 0.0,SDL_Point* center=NULL,SDL_RendererFlip flip=SDL_FLIP_NONE);
-
+	void SetRect(const int& xp,const int& yp);
+	SDL_Rect GetRect() const;
 
 	int getwidth() { return wtext; };
 	int getheight() { return htext; };
@@ -35,9 +37,12 @@ public:
 
 
 private:
+	SDL_Rect rec;
 	string str;
 	SDL_Color textcolor;
 	SDL_Texture* texture;
+	int xtext;
+	int ytext;
 	int wtext;
 	int htext;
 };

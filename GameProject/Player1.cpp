@@ -1,8 +1,8 @@
 #include "Player1.h"
 Player1::Player1() {
 	frame = 0;
-	xpos = 400;
-	ypos = 0;
+	xpos = 332;
+	ypos = 664;
 	xval = 0;
 	yval = 0;
 	widthframe = 0;
@@ -225,7 +225,7 @@ void Player1::CheckToMap(Map& mapdata) {
 			}
 
 			else {
-				if (mapdata.tile[y1][x2] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE) {
+				if ((mapdata.tile[y1][x2] != BLANK_TILE&&onground || mapdata.tile[y2][x2] != BLANK_TILE&&onground)) {
 					xpos = (x2)*TILE_SIZE;
 					xpos -= widthframe * 3 - 10;
 					xval = 0;
@@ -243,7 +243,7 @@ void Player1::CheckToMap(Map& mapdata) {
 				IncreasePowerPlayer1();
 			}
 			else {
-				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y2][x1] != BLANK_TILE) {
+				if (mapdata.tile[y1][x1] != BLANK_TILE &&onground || mapdata.tile[y2][x1] != BLANK_TILE&&onground) {
 					xpos = (x1)*TILE_SIZE + 20;
 					xval = 0;
 				}
@@ -255,7 +255,7 @@ void Player1::CheckToMap(Map& mapdata) {
 	x1 = (xpos+25) / TILE_SIZE;
 	x2 = (xpos + width_min+40) / TILE_SIZE;
 
-	y1 = (ypos + yval+5) / TILE_SIZE;
+	y1 = (ypos + yval) / TILE_SIZE;
 	y2 = (ypos + yval + heightframe*3 -17) / TILE_SIZE;
 
 	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
@@ -289,15 +289,14 @@ void Player1::CheckToMap(Map& mapdata) {
 			}
 			else{
 			if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y1][x2] != BLANK_TILE) {
-				ypos = (y1)*TILE_SIZE;
-
+				ypos = (y1)*TILE_SIZE+10;
 				yval = 0;
 				}
 			}
 		}
 	}
 
-
+	
 	xpos += xval;
 	ypos += yval;
 	if (xpos < 0) {

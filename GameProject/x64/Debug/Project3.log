@@ -12,9 +12,9 @@ C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(229,17): warning C4
 C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(247,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(255,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(256,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(258,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(258,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(259,41): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(273,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(292,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(307,38): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(292,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\84942\source\repos\Project2\GameProject\Player1.cpp(306,38): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Project3.vcxproj -> C:\Users\84942\source\repos\Project2\GameProject\x64\Debug\GameProject.exe

@@ -29,6 +29,6 @@ protected:
 	SDL_Texture* texture;
 	SDL_Rect rect;
 	
-
+	
 };
 

@@ -16,7 +16,7 @@ bool Text::LoadFont(TTF_Font* font, SDL_Renderer* renderer) {
 		wtext = text_sur->w;
 		htext = text_sur->h;
 
-		SDL_FreeSurface(text_sur);
+		SDL_FreeSurface(text_sur); 
 	}
 	return texture != NULL;
 }
@@ -48,13 +48,21 @@ void Text::SetColor(int color) {
 	}
 
 }
+void Text::SetRect(const int& xp,const int& yp) {
+	rec.x = xp;
+	rec.y = yp;
+	rec.w = wtext;
+	rec.h = htext;
+}
+SDL_Rect Text::GetRect() const {
+	return rec;
+}
 void Text::RenderText(SDL_Renderer* renderer, int xpos, int ypos, SDL_Rect* clip , double angle , SDL_Point* center, SDL_RendererFlip flip ) {
 	SDL_Rect renderQuad = { xpos,ypos,wtext,htext };
 
 	if (clip != NULL) {
 		renderQuad.w = clip->w;
 		renderQuad.h = clip->h;
-
 	}
 	SDL_RenderCopyEx(renderer, texture, clip, &renderQuad, angle, center, flip);
 }
