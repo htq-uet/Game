@@ -3,9 +3,13 @@
 #include <iostream>
 #include "gamemap.h"
 #include "Player1.h"
+#include "Player2.h"
 #include "ImpTimer.h"
 #include "Text.h"
 #include "Menu.h"
+#include "Mushroom.h"
+
+
 #include <iostream>
 using namespace std;
 BaseObj background;
@@ -100,9 +104,14 @@ int main(int arcs, char* argv[]) {
 	player1.LoadImg("assets/player1.png", gscreen);
 	player1.setclip();
 
-	Player1 player2;
+	Player2 player2;
 	player2.LoadImg("assets/player2.png", gscreen);
 	player2.setclip();
+
+	Mushroom cutemus;
+	cutemus.LoadImg("assets/mushroom.png", gscreen);
+	cutemus.getNum(4);
+	cutemus.setclip();
 
 	Text menu_text;
 	menu_text.SetColor(Text::PINK);
@@ -133,6 +142,7 @@ int main(int arcs, char* argv[]) {
 				}
 			}
 			player1.handleEvent(event, gscreen,sound);
+			player2.handleEvent(event, gscreen, sound);
 		}
 		SDL_SetRenderDrawColor(gscreen, 255, 255, 255,255);
 		SDL_RenderClear(gscreen);
@@ -144,6 +154,11 @@ int main(int arcs, char* argv[]) {
 
 		player1.DoPlayer(map_data);
 		player1.show(gscreen);
+
+		player2.DoPlayer(map_data);
+		player2.show(gscreen);
+
+		cutemus.show(gscreen);
 
 		game_map.SetMap(map_data);
 		game_map.DrawMap(gscreen);
