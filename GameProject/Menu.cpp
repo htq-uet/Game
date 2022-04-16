@@ -16,8 +16,8 @@ Menu::~Menu() {
 	return false;
 }
 
-Text text_menu[2];
-bool selected[2] = { 0,0 };
+Text text_menu[100];
+bool selected[1]={0};
 
 void BuildItemMenu(const int& index, const string& text, const int& x, const int& y, const int& color, SDL_Renderer* renderer, TTF_Font* font) {
 	text_menu[index].SetColor(color);
@@ -35,7 +35,7 @@ int Menu::loadMenu(SDL_Renderer* renderer, TTF_Font* font) {
 	
 	
 
-	BuildItemMenu(0, "Play Game", 700, 600, Text::PINK, renderer, font);
+	BuildItemMenu(0, "- Click here to play game -", 597, 800, Text::BLACK, renderer, font);
 
 	int xm = 0;
 	int ym = 0;
@@ -43,17 +43,16 @@ int Menu::loadMenu(SDL_Renderer* renderer, TTF_Font* font) {
 	SDL_Event mevent;
 	
 	while (true) {
-		LoadImg("assets/background1.png", renderer);
+		LoadImg("assets/menu.png", renderer);
 		SDL_Rect renderQuad = { xpos,ypos,1760,960};
 		SDL_RenderCopy(renderer, texture, NULL, &renderQuad);
-		text_menu[0].RenderText(renderer, 700,600);
-
+		text_menu[0].RenderText(renderer, 597,800);
 		while (SDL_PollEvent (& mevent))
 		{
 			
 			switch (mevent.type) {
 			case SDL_QUIT:
-				return 1;
+				return 2;
 			case SDL_MOUSEMOTION:
 			{
 				xm = mevent.motion.x;
@@ -64,14 +63,14 @@ int Menu::loadMenu(SDL_Renderer* renderer, TTF_Font* font) {
 						if (selected[i] == false)
 						{
 							selected[i] = true;
-							ChangeColor(i, Text::BLACK, renderer, font);
+							ChangeColor(i, Text::PINK, renderer, font);
 						}
 					}
 					else {
 						if (selected[i] == true)
 						{
 							selected[i] = false;
-							ChangeColor(i, Text::PINK, renderer, font);
+							ChangeColor(i, Text::BLACK, renderer, font);
 						}
 					}
 				}
@@ -82,18 +81,15 @@ int Menu::loadMenu(SDL_Renderer* renderer, TTF_Font* font) {
 				xm = mevent.button.x;
 				ym = mevent.button.y;
 
-				for (int i = 0; i < 1; i++)
-				{
-					if (CheckFocusWithRect(xm, ym, text_menu[i].GetRect()))
+				if (CheckFocusWithRect(xm, ym, text_menu[0].GetRect()))
 					{
-						return i;
+						return 0;
 					}
-				}
 			}
 			case SDL_KEYDOWN:
 				if (mevent.key.keysym.sym == SDLK_ESCAPE)
 				{
-					return 1;
+					return QUIT;
 				}
 			default:
 				break;
@@ -101,5 +97,6 @@ int Menu::loadMenu(SDL_Renderer* renderer, TTF_Font* font) {
 		}
 		SDL_RenderPresent(renderer);
 	}
-		return 1;
+		return QUIT;
 }
+

@@ -39,7 +39,7 @@ bool init() {
 		if (TTF_Init() == -1) {
 			success = false;
 		}
-		mainfont = TTF_OpenFont("fonts/m6x11.ttf", 100);
+		mainfont = TTF_OpenFont("fonts/m6x11.ttf", 50);
 		if (mainfont == NULL) {
 			success = false;
 		}
@@ -120,12 +120,15 @@ int main(int arcs, char* argv[]) {
 
 	Menu menu;
 	bool quit = false;
-	if (menu.loadMenu(gscreen, mainfont) == 1)
+	bool isRunning = false;
+	if (menu.loadMenu(gscreen, mainfont) == 0) {
+		isRunning = true;
+		quit = false;
+	}
+	if (menu.loadMenu(gscreen, mainfont) == QUIT) {
 		quit = true;
-
-	
-
-	while (!quit) {
+	}
+	while (!quit && isRunning) {
 		
 		fps_timer.start();
 		while (SDL_PollEvent(&event) != 0) {
