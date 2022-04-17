@@ -35,4 +35,11 @@
 *.out
 *.app
 
+x64/
+SDL2_ttf-2.0.18/
+SDL2_mixer-2.0.4/
+SDL2_image-2.0.5/
+SDL2-2.0.8/
+SDL2-2.0.20/
+
 # End of https://www.toptal.com/developers/gitignore/api/c++
