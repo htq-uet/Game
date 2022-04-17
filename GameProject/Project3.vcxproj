@@ -79,8 +79,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\KitandKat\GameProject\SDL2_image-2.0.5\include;D:\KitandKat\GameProject\SDL2_mixer-2.0.4\include;D:\KitandKat\GameProject\SDL2_ttf-2.0.18\include;D:\KitandKat\GameProject\SDL2-2.0.8\include;D:\KitandKat\GameProject\SDL2-2.0.20\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\KitandKat\GameProject\SDL2-2.0.20\lib\x64;D:\KitandKat\GameProject\SDL2-2.0.8\lib\x64;D:\KitandKat\GameProject\SDL2_ttf-2.0.18\lib\x64;D:\KitandKat\GameProject\SDL2_mixer-2.0.4\lib\x64;D:\KitandKat\GameProject\SDL2_image-2.0.5\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\84942\source\repos\KitandKat\GameProject\SDL2_mixer-2.0.4\include;C:\Users\84942\Documents\GitHub\Game\GameProject\SDL2_image-2.0.5\include;C:\Users\84942\Documents\GitHub\Game\GameProject\SDL2-2.0.20\include;C:\Users\84942\Documents\GitHub\Game\GameProject\SDL2_ttf-2.0.18\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\84942\Documents\GitHub\Game\GameProject\SDL2_image-2.0.5\lib\x64;C:\Users\84942\Documents\GitHub\Game\GameProject\SDL2_mixer-2.0.4\lib\x64;C:\Users\84942\Documents\GitHub\Game\GameProject\SDL2_ttf-2.0.18\lib\x64;C:\Users\84942\Documents\GitHub\Game\GameProject\SDL2-2.0.20\lib\x64;C:\Users\84942\Documents\GitHub\Game\GameProject\SDL2-2.0.8\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -151,6 +151,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Mushroom.cpp" />
     <ClCompile Include="Player1.cpp" />
+    <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Text.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mushroom.h" />
     <ClInclude Include="Player1.h" />
+    <ClInclude Include="Player2.h" />
     <ClInclude Include="Text.h" />
   </ItemGroup>
   <ItemGroup>

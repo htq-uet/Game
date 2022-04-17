@@ -1,9 +1,2 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(514,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Project3.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-main .obj : error LNK2019: unresolved external symbol "public: __cdecl Player2::Player2(void)" (??0Player2@@QEAA@XZ) referenced in function SDL_main
-main .obj : error LNK2019: unresolved external symbol "public: __cdecl Player2::~Player2(void)" (??1Player2@@QEAA@XZ) referenced in function SDL_main
-main .obj : error LNK2019: unresolved external symbol "public: virtual bool __cdecl Player2::LoadImg(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,struct SDL_Renderer *)" (?LoadImg@Player2@@UEAA_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAUSDL_Renderer@@@Z) referenced in function SDL_main
-main .obj : error LNK2019: unresolved external symbol "public: void __cdecl Player2::show(struct SDL_Renderer *)" (?show@Player2@@QEAAXPEAUSDL_Renderer@@@Z) referenced in function SDL_main
-main .obj : error LNK2019: unresolved external symbol "public: void __cdecl Player2::handleEvent(union SDL_Event,struct SDL_Renderer *,struct Mix_Chunk * * const)" (?handleEvent@Player2@@QEAAXTSDL_Event@@PEAUSDL_Renderer@@QEAPEAUMix_Chunk@@@Z) referenced in function SDL_main
-main .obj : error LNK2019: unresolved external symbol "public: void __cdecl Player2::setclip(void)" (?setclip@Player2@@QEAAXXZ) referenced in function SDL_main
-main .obj : error LNK2019: unresolved external symbol "public: void __cdecl Player2::DoPlayer(struct Map &)" (?DoPlayer@Player2@@QEAAXAEAUMap@@@Z) referenced in function SDL_main
-D:\KitandKat\GameProject\x64\Debug\GameProject.exe : fatal error LNK1120: 7 unresolved externals
+  Project3.vcxproj -> C:\Users\84942\Documents\GitHub\Game\GameProject\x64\Debug\GameProject.exe
