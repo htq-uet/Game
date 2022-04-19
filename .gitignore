@@ -39,7 +39,7 @@
 
 # End of https://www.toptal.com/developers/gitignore/api/c++
 
-# DUMA
+# SDL Source vs Debug
 
 GameProject/x64/
 GameProject/SDL2_ttf-2.0.18/
