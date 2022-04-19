@@ -97,7 +97,7 @@ int main(int arcs, char* argv[]) {
 		return -1;
 	}
 	GameMap game_map;
-	game_map.LoadMap("map1.dat.txt");
+	game_map.LoadMap("map1.txt");
 	game_map.LoadTiles(gscreen);
 
 	Player1 player1;

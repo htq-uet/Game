@@ -99,7 +99,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="map1.dat.txt" />
+    <Text Include="map1.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\map\map1.dat" />

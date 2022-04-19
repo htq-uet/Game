@@ -39,7 +39,10 @@ bool Player2::LoadImg(string path, SDL_Renderer* renderer)
 void Player2::show(SDL_Renderer* des)
 {
 	UpdateImgPlayer(des);
-	if ((input_type.left == 1) || (input_type.right == 1) || (input_type.stayleft == 1) || (input_type.stayright == 1)
+	if ((input_type.left == 1) || 
+		(input_type.right == 1) ||
+		(input_type.stayleft == 1) ||
+		(input_type.stayright == 1)
 		&& onground == 1 && input_type.jump == 0)
 	{
 		if (frame >= 0)
@@ -219,7 +222,7 @@ void Player2::CheckToMap(Map& mapdata) {
 	x1 = (xpos + xval + 10) / TILE_SIZE;
 	x2 = (xpos + xval + widthframe * 3 - 10) / TILE_SIZE;
 
-	y1 = (ypos + 20) / TILE_SIZE;
+	y1 = (ypos + 30) / TILE_SIZE;
 	y2 = (ypos + height_min + 20) / TILE_SIZE;
 
 	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
@@ -235,7 +238,8 @@ void Player2::CheckToMap(Map& mapdata) {
 			}
 
 			else {
-				if ((mapdata.tile[y1][x2] != BLANK_TILE && onground || mapdata.tile[y2][x2] != BLANK_TILE && onground)) {
+				if ((mapdata.tile[y1][x2] != BLANK_TILE ||
+					 mapdata.tile[y2][x2] != BLANK_TILE )) {
 					xpos = (x2)*TILE_SIZE;
 					xpos -= widthframe * 3 - 10;
 					xval = 0;
@@ -253,7 +257,8 @@ void Player2::CheckToMap(Map& mapdata) {
 				IncreasePowerPlayer2();
 			}
 			else {
-				if (mapdata.tile[y1][x1] != BLANK_TILE && onground || mapdata.tile[y2][x1] != BLANK_TILE && onground) {
+				if (mapdata.tile[y1][x1] != BLANK_TILE || 
+					mapdata.tile[y2][x1] != BLANK_TILE ) {
 					xpos = (x1)*TILE_SIZE + 20;
 					xval = 0;
 				}
