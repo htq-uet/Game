@@ -333,10 +333,10 @@ void Player2::IncreasePowerPlayer2() {
 }
 void Player2::UpdateImgPlayer(SDL_Renderer* des) {
 	if (onground) {
-		if (status == WALK_LEFT) {
+		if (input_type.left == 1) {
 			LoadImg("assets/player2left.png", des);
 		}
-		else if (status == WALK_RIGHT) {
+		else if (input_type.right == 1) {
 			LoadImg("assets/player2.png", des);
 		}
 		else if (status == STAY_LEFT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
@@ -347,11 +347,11 @@ void Player2::UpdateImgPlayer(SDL_Renderer* des) {
 		}
 	}
 	else {
-		if (status == WALK_LEFT) {
-			LoadImg("assets/player2left.png", des);
+		if (input_type.left == 1) {
+			LoadImg("assets/darkjumpleft.png", des);
 		}
 		else if (status == WALK_RIGHT) {
-			LoadImg("assets/player2.png", des);
+			LoadImg("assets/darkjumpright.png", des);
 		}
 	}
 

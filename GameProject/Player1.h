@@ -6,7 +6,7 @@
 #define MAX_FALL_SPEED 10
 #define PLAYER_SPEED 2
 #define BLANK_TILE 0
-#define JUMP_VAL 7
+#define JUMP_VAL 8
 #define PINK_FISH 5
 #define POISON 4
 
@@ -21,7 +21,8 @@ public:
 		WALK_RIGHT = 0,
 		WALK_LEFT = 1,
 		STAY_LEFT = 2,
-		STAY_RIGHT=3,
+		STAY_RIGHT = 3,
+		JUMP=4,
 	};
 
 	bool LoadImg(string path, SDL_Renderer* renderer);
