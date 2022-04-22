@@ -194,6 +194,7 @@ void Player1::DoPlayer(Map& mapdata) {
 	}
 
 	CheckToMap(mapdata);
+	CheckToMus(mapdata);
 }
 void Player1::CheckToMap(Map& mapdata) {
 	int x1 = 0;
@@ -339,4 +340,102 @@ void Player1::UpdateImgPlayer(SDL_Renderer* des) {
 		}
 	}
 
+}
+
+
+void Player1::CheckToMus(Map& mapdata) {
+	int x1 = 0;
+	int x2 = 0;
+
+	int y1 = 0;
+	int y2 = 0;
+
+    bool checkCollision = false;
+    int x1B = 900;
+    int x2B = 900 + 48*3;
+    int y1B = 640;
+    int y2B = 640 + 48*3;
+	//check horizontal
+	int height_min = (heightframe * 3 < TILE_SIZE ? heightframe * 3 : TILE_SIZE);
+
+	x1 = (xpos+xval+30);
+	x2 = (xpos + xval + widthframe*3 -30);
+
+	y1 = (ypos+20) ;
+	y2 = (ypos + height_min +20) ;
+
+	if (x1/TILE_SIZE >= 0 && x2/TILE_SIZE < MAP_MAP_X && y1/TILE_SIZE >= 0 && y2/TILE_SIZE < MAP_MAP_Y) {
+             if(x2>=x1B&&y2>=y1B&&x2<=x2B&&y2<=y2B||
+                x1>=x1B&&y1>=y1B&&x1<=x2B&&y1<=y2B||
+                x2>=x1B&&y1>=y1B&&x2<=x2B&&y1<=y2B||
+                x1>=x1B&&y2>=y1B&&x1<=x2B&&y2<=y2B
+                ){
+                    checkCollision=true;
+                }
+
+
+    //If none of the sides from A are outside B\
+    true;
+				if (checkCollision) {
+					if(xval>0){
+                        xpos = x2+82;
+                        xpos -= widthframe * 3+56 ;
+                        xval = 0;
+					}
+					else if(xval<0){
+                        xpos = x1-26;
+                        xval = 0;
+					}
+				}
+		}
+	//check vertical
+	int width_min = widthframe*3< TILE_SIZE ? widthframe*3 : TILE_SIZE;
+	x1 = (xpos+60) ;
+	x2 = (xpos + width_min-40) ;
+
+	y1 = (ypos + yval) ;
+	y2 = (ypos + yval + heightframe*3 -40) ;
+
+	if (x1/TILE_SIZE >= 0 && x2/TILE_SIZE < MAP_MAP_X && y1/TILE_SIZE >= 0 && y2/TILE_SIZE < MAP_MAP_Y) {
+            if(x2>=x1B&&y2>=y1B&&x2<=x2B&&y2<=y2B){
+                    checkCollision=true;
+                }
+                else if(x1>=x1B&&y1>=y1B&&x1<=x2B&&y1<=y2B){
+                    checkCollision=true;
+                }
+                else if(x2>=x1B&&y1>=y1B&&x2<=x2B&&y1<=y2B){
+                    checkCollision=true;
+                }
+                else if(x1>=x1B&&y2>=y1B&&x1<=x2B&&y2<=y2B){
+                    checkCollision=true;
+                }
+                else checkCollision=false;
+        if(yval>0){
+        if (checkCollision) {
+					ypos = y2;
+					ypos -= heightframe * 3 - 17;
+					yval = -5;
+			}
+		}
+		else if (yval < 0) {
+
+			if (checkCollision) {
+				ypos = y1+10;
+				yval = 0;
+			}
+		}
+
+	xpos += xval;
+	ypos += yval;
+	if (xpos < 0) {
+		xpos = 0;
+	}
+	else if ((xpos + widthframe*3) > mapdata.maxx) {
+		xpos = mapdata.maxx - widthframe*3 -1;
+	}
+
+	if (ypos < 0) {
+		ypos = 0;
+        }
+	}
 }
