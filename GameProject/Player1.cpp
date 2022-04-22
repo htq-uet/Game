@@ -127,6 +127,7 @@ void Player1::handleEvent(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 
 			break;
 		case SDLK_w:
+			status = JUMP;
 			if (onground) {
 				Mix_PlayChannel(-1, sound[0], 0);
 				input_type.jump = 1;
@@ -135,6 +136,7 @@ void Player1::handleEvent(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			}
 			break;
 		default:
+
 			break;
 		}
 	}
@@ -289,7 +291,7 @@ void Player1::CheckToMap(Map& mapdata) {
 			}
 			else{
 			if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y1][x2] != BLANK_TILE) {
-				ypos = (y1)*TILE_SIZE+10;
+				ypos = (y1)*TILE_SIZE+5;
 				yval = 0;
 				}
 			}
@@ -317,10 +319,10 @@ void Player1::IncreasePowerPlayer1() {
 }
 void Player1::UpdateImgPlayer(SDL_Renderer* des) {
 	if (onground) {
-		if (status == WALK_LEFT) {
+		if (input_type.left==1) {
 			LoadImg("assets/player1left.png", des);
 		}
-		else if (status == WALK_RIGHT) {
+		else if (input_type.right==1) {
 			LoadImg("assets/player1.png", des);
 		}
 		else if (status == STAY_LEFT && input_type.jump == 0&&input_type.left==0&&input_type.right==0) {
@@ -329,13 +331,14 @@ void Player1::UpdateImgPlayer(SDL_Renderer* des) {
 		else if (status == STAY_RIGHT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
 			LoadImg("assets/stayright.png",des);
 		}
+		
 	}
 	else {
-		if (status == WALK_LEFT) {
-			LoadImg("assets/player1left.png", des);
+		if (input_type.left == 1) {
+		LoadImg("assets/jumpleft.png", des);
 		}
-		else if (status == WALK_RIGHT) {
-			LoadImg("assets/player1.png", des);
+		else if (input_type.right == 1) {
+		LoadImg("assets/jumpright.png", des);
 		}
 	}
 
