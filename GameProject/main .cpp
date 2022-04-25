@@ -7,7 +7,7 @@
 #include "ImpTimer.h"
 #include "Text.h"
 #include "Menu.h"
-#include "Mushroom.h"
+#include "OtherObj.h"
 
 
 #include <iostream>
@@ -108,10 +108,19 @@ int main(int arcs, char* argv[]) {
 	player2.LoadImg("assets/player2.png", gscreen);
 	player2.setclip();
 
-	Mushroom cutemus;
-	cutemus.LoadImg("assets/mushroom.png", gscreen);
+	OtherObj cutemus;
+	cutemus.getPos(1000,640);
+    cutemus.LoadImg("assets/mushroom.png", gscreen, 48);
 	cutemus.getNum(4);
 	cutemus.setclip();
+
+	OtherObj gate;
+	gate.getPos(480,550);
+	gate.LoadImg("assets/gate.png",gscreen, 32);
+	gate.getNum(14);
+	gate.setclip();
+
+
 
 	Text menu_text;
 	menu_text.SetColor(Text::PINK);
@@ -163,6 +172,8 @@ int main(int arcs, char* argv[]) {
 
 		cutemus.show(gscreen);
 
+		gate.show(gscreen);
+		
 		game_map.SetMap(map_data);
 		game_map.DrawMap(gscreen);
 		

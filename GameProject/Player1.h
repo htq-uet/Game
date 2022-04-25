@@ -39,6 +39,8 @@ public:
 
 	void CheckToMus(Map& mapdata);
 
+	void CheckToGate(Map& mapdata);
+
 
 private:
 
