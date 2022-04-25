@@ -42,10 +42,10 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mushroom.cpp">
+    <ClCompile Include="Player2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player2.cpp">
+    <ClCompile Include="OtherObj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,10 +71,10 @@
     <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Mushroom.h">
+    <ClInclude Include="Player2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player2.h">
+    <ClInclude Include="OtherObj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

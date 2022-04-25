@@ -33,13 +33,15 @@ public:
 	void DoPlayer(Map& mapdata);
 
 	void CheckToMap(Map& mapdata);
+
+	void CheckToMus();
+
+	void CheckToGate();
+
 	void UpdateImgPlayer(SDL_Renderer* des);
 
 	void IncreasePowerPlayer1();
 
-	void CheckToMus(Map& mapdata);
-
-	void CheckToGate(Map& mapdata);
 
 
 private:

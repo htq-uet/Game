@@ -25,9 +25,10 @@ private:
 	float ypos;
 	int widthframe;
 	int heightframe;
-	SDL_Rect FRAME_CLIP[20];
+	int n;
+	SDL_Rect FRAME_CLIP[14];
 	int frame;
-	int n ;
+	
 	int frameSize;
 
 };
