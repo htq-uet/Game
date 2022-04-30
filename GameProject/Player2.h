@@ -35,6 +35,10 @@ public:
 	void CheckToMap(Map& mapdata);
 	void UpdateImgPlayer(SDL_Renderer* des);
 
+	void CheckToMus();
+
+	void CheckToGate();
+
 	void IncreasePowerPlayer2(); //build power
 
 
