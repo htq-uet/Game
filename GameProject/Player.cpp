@@ -1,6 +1,6 @@
-#include "Player1.h"
+#include "Player.h"
 #include "OtherObj.h"
-Player1::Player1() 
+Player::Player() 
 {
 	frame = 0;
 	xpos = 332;
@@ -18,10 +18,10 @@ Player1::Player1()
 	input_type.jump = 0;
 	pinkfishcount = 0;
 }
-Player1::~Player1() {
+Player::~Player() {
 	Free();
 }
-bool Player1::LoadImg(string path, SDL_Renderer* renderer) {
+bool Player::LoadImg(string path, SDL_Renderer* renderer) {
 	bool ktra = BaseObj::LoadImg(path, renderer);
 
 	if (ktra == true) {
@@ -31,7 +31,7 @@ bool Player1::LoadImg(string path, SDL_Renderer* renderer) {
 	return ktra;
 }
 
-void Player1::setclip() {
+void Player::setclip() {
 	if (widthframe > 0 && heightframe > 0) {
 		FRAME_CLIP[0].x = 0;
 		FRAME_CLIP[0].y = 0;
@@ -71,8 +71,8 @@ void Player1::setclip() {
 
 	}
 }
-void Player1::show(SDL_Renderer* des) {
-	UpdateImgPlayer(des);
+void Player::show1(SDL_Renderer* des) {
+	UpdateImgPlayer1(des);
 	if ((input_type.left == 1 || input_type.right == 1|| input_type.stayright == 1|| input_type.stayleft == 1)&&onground==true&&input_type.jump==0) {
 		if (frame >= 0) {
 			++frame;
@@ -105,7 +105,41 @@ void Player1::show(SDL_Renderer* des) {
 
 	SDL_RenderCopy(des, texture, currentclip, &renderQuad);
 }
-void Player1::handleEvent(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]) {
+void Player::show2(SDL_Renderer* des) {
+	UpdateImgPlayer2(des);
+	if ((input_type.left == 1 || input_type.right == 1 || input_type.stayright == 1 || input_type.stayleft == 1) && onground == true && input_type.jump == 0) {
+		if (frame >= 0) {
+			++frame;
+		}
+
+	}
+	else {
+		frame = 0;
+	}
+	if (input_type.jump == 1) {
+		frame = 0;
+	}
+
+	if (frame / 6 >= 6) {
+		frame = 0;
+	}
+
+	rect.x = xpos;
+	rect.y = ypos;
+
+	SDL_Rect* currentclip = &FRAME_CLIP[frame / 6];
+	SDL_Rect renderQuad = { rect.x,rect.y,widthframe * 3,heightframe * 3 };
+
+	if (currentclip != NULL)
+	{
+		renderQuad.w = 3 * currentclip->w;
+		renderQuad.h = 3 * currentclip->h;
+	}
+
+
+	SDL_RenderCopy(des, texture, currentclip, &renderQuad);
+}
+void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]) {
 	if (e.type == SDL_KEYDOWN) {
 		switch (e.key.keysym.sym) {
 		case SDLK_d:
@@ -115,7 +149,7 @@ void Player1::handleEvent(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			input_type.right = 1;
 			input_type.left = 0;
 			
-			UpdateImgPlayer(renderer);
+			UpdateImgPlayer1(renderer);
 			break;
 
 		case SDLK_a: 
@@ -125,7 +159,7 @@ void Player1::handleEvent(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			input_type.left = 1;
 			input_type.right = 0;
 			
-			UpdateImgPlayer(renderer);
+			UpdateImgPlayer1(renderer);
 
 			break;
 		case SDLK_w:
@@ -154,7 +188,7 @@ void Player1::handleEvent(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			input_type.right = 0;
 			input_type.stayleft = 0;
 			
-			UpdateImgPlayer(renderer);
+			UpdateImgPlayer1(renderer);
 
 			break;
 		case SDLK_a: 
@@ -167,7 +201,7 @@ void Player1::handleEvent(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			input_type.left = 0;
 			input_type.stayright = 0;
 			
-			UpdateImgPlayer(renderer);
+			UpdateImgPlayer1(renderer);
 
 			break;
 		default:
@@ -175,7 +209,76 @@ void Player1::handleEvent(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 		}
 	}
 }
-void Player1::DoPlayer(Map& mapdata) {
+void Player::handleEvent2(SDL_Event e, SDL_Renderer* renderer, Mix_Chunk* sound[5])
+{
+	if (e.type == SDL_KEYDOWN) {
+		switch (e.key.keysym.sym) {
+		case SDLK_RIGHT:
+			status = WALK_RIGHT;
+			input_type.stayleft = 0;
+			input_type.stayright = 0;
+			input_type.right = 1;
+			input_type.left = 0;
+
+			UpdateImgPlayer2(renderer);
+			break;
+
+		case SDLK_LEFT:
+			status = WALK_LEFT;
+			input_type.stayleft = 0;
+			input_type.stayright = 0;
+			input_type.left = 1;
+			input_type.right = 0;
+
+			UpdateImgPlayer2(renderer);
+
+			break;
+		case SDLK_UP:
+			if (onground) {
+				Mix_PlayChannel(-1, sound[0], 0);
+				input_type.jump = 1;
+				input_type.stayleft = 0;
+				input_type.stayright = 0;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else if (e.type == SDL_KEYUP) {
+		switch (e.key.keysym.sym) {
+		case SDLK_RIGHT:
+			status = STAY_RIGHT;
+			if (onground == true) {
+				input_type.stayright = 1;
+				input_type.right = 0;
+				input_type.stayleft = 0;
+			}
+			input_type.right = 0;
+			input_type.stayleft = 0;
+
+			UpdateImgPlayer2(renderer);
+
+			break;
+		case SDLK_LEFT:
+			status = STAY_LEFT;
+			if (onground == true) {
+				input_type.stayleft = 1;
+				input_type.left = 0;
+				input_type.stayright = 0;
+			}
+			input_type.left = 0;
+			input_type.stayright = 0;
+
+			UpdateImgPlayer2(renderer);
+
+			break;
+		default:
+			break;
+		}
+	}
+}
+void Player::DoPlayer(Map& mapdata) {
 	xval = 0;
 	yval += GRAVITY_SPEED;
 
@@ -201,7 +304,7 @@ void Player1::DoPlayer(Map& mapdata) {
 	CheckToMus();
 	CheckToGate();
 }
-void Player1::CheckToMap(Map& mapdata) {
+void Player::CheckToMap(Map& mapdata) {
 	int x1 = 0;
 	int x2 = 0;
 
@@ -318,10 +421,10 @@ void Player1::CheckToMap(Map& mapdata) {
 	
 }
 
-void Player1::IncreasePowerPlayer1() {
+void Player::IncreasePowerPlayer1() {
 	pinkfishcount++;
 }
-void Player1::UpdateImgPlayer(SDL_Renderer* des) {
+void Player::UpdateImgPlayer1(SDL_Renderer* des) {
 	if (onground) {
 		if (input_type.left==1) {
 			LoadImg("assets/player1left.png", des);
@@ -345,13 +448,36 @@ void Player1::UpdateImgPlayer(SDL_Renderer* des) {
 		LoadImg("assets/jumpright.png", des);
 		}
 	}
+}
+void Player::UpdateImgPlayer2(SDL_Renderer* des) {
+	if (onground) {
+		if (input_type.left == 1) {
+			LoadImg("assets/player2left.png", des);
+		}
+		else if (input_type.right == 1) {
+			LoadImg("assets/player2.png", des);
+		}
+		else if (status == STAY_LEFT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
+			LoadImg("assets/player2stayleft.png", des);
+		}
+		else if (status == STAY_RIGHT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
+			LoadImg("assets/player2stayright.png", des);
+		}
+	}
+	else {
+		if (input_type.left == 1) {
+			LoadImg("assets/darkjumpleft.png", des);
+		}
+		else if (status == WALK_RIGHT) {
+			LoadImg("assets/darkjumpright.png", des);
+		}
+	}
 
 }
 
-
-void Player1::CheckToMus() {
+void Player::CheckToMus() {
 	OtherObj mushroom;
-	mushroom.getPos(1000, 640);
+	mushroom.getPos(1400, 640);
 
 	int x1 = 0;
 	int x2 = 0;
@@ -438,7 +564,7 @@ void Player1::CheckToMus() {
 		
 	}
 }
-void Player1::CheckToGate()
+void Player::CheckToGate()
 {
     OtherObj gatelv1;
     gatelv1.getPos(480,550);
