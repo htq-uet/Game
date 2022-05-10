@@ -2,8 +2,7 @@
 #include "BaseObj.h"
 #include <iostream>
 #include "gamemap.h"
-#include "Player1.h"
-#include "Player2.h"
+#include "Player.h"
 #include "ImpTimer.h"
 #include "Text.h"
 #include "Menu.h"
@@ -11,6 +10,8 @@
 
 
 #include <iostream>
+
+
 using namespace std;
 BaseObj background;
 TTF_Font *mainfont;
@@ -54,7 +55,7 @@ bool init() {
 		cerr << "Sound Error!\n" << Mix_GetError();
 		success = false;
 	}
-	
+
 
 	return success;
 }
@@ -78,7 +79,7 @@ void close() {
 
 	TTF_Quit();
 
-	IMG_Quit(); 
+	IMG_Quit();
 	SDL_Quit();
 }
 
@@ -100,16 +101,16 @@ int main(int arcs, char* argv[]) {
 	game_map.LoadMap("map1.txt");
 	game_map.LoadTiles(gscreen);
 
-	Player1 player1;
+	Player player1;
 	player1.LoadImg("assets/player1.png", gscreen);
 	player1.setclip();
 
-	Player2 player2;
+	Player player2;
 	player2.LoadImg("assets/player2.png", gscreen);
 	player2.setclip();
 
 	OtherObj cutemus;
-	cutemus.getPos(1000,640);
+	cutemus.getPos(1400,640);
     cutemus.LoadImg("assets/mushroom.png", gscreen, 48);
 	cutemus.getNum(4);
 	cutemus.setclip();
@@ -142,7 +143,7 @@ int main(int arcs, char* argv[]) {
 		quit = true;
 	}
 	while (!quit && isRunning) {
-		
+
 		fps_timer.start();
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {
@@ -157,38 +158,39 @@ int main(int arcs, char* argv[]) {
 					break;
 				}
 			}
-			player1.handleEvent(event, gscreen,sound);
-			player2.handleEvent(event, gscreen, sound);
+			player1.handleEvent1(event, gscreen,sound);
+			player2.handleEvent2(event, gscreen, sound);
 		}
 		SDL_SetRenderDrawColor(gscreen, 255, 255, 255,255);
 		SDL_RenderClear(gscreen);
 
 		background.Render(gscreen, NULL);
-		
+
 		Map map_data = game_map.getMap();
 
 
 		player1.DoPlayer(map_data);
-		player1.show(gscreen);
+		player1.show1(gscreen);
 
 		player2.DoPlayer(map_data);
-		player2.show(gscreen);
+		player2.show2(gscreen);
 
 		cutemus.show(gscreen);
 
 		gate.show(gscreen);
 		
 		box.show(gscreen);
+
 		game_map.SetMap(map_data);
 		game_map.DrawMap(gscreen);
-		
-		
+
+
 
 		int real_time = fps_timer.get_tick();
 		int time_per_frame = 1000 / FPS;
 
-		
-		
+
+
 		menu_text.RenderText(gscreen, 800, 15);
 
 
@@ -202,5 +204,6 @@ int main(int arcs, char* argv[]) {
 	}
 	close();
 	menu_text.Free();
-	return 0; 
+	return 0;
 }
+
