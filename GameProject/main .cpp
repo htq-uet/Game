@@ -120,7 +120,11 @@ int main(int arcs, char* argv[]) {
 	gate.getNum(14);
 	gate.setclip();
 
-
+	OtherObj box;
+	box.getPos(700,700);
+	box.LoadImg("assets/box.png",gscreen, 24);
+	box.getNum(1);
+	box.setclip();
 
 	Text menu_text;
 	menu_text.SetColor(Text::PINK);
@@ -174,6 +178,7 @@ int main(int arcs, char* argv[]) {
 
 		gate.show(gscreen);
 		
+		box.show(gscreen);
 		game_map.SetMap(map_data);
 		game_map.DrawMap(gscreen);
 		
