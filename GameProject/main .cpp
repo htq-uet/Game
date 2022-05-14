@@ -97,9 +97,8 @@ int main(int arcs, char* argv[]) {
 	if (LoadBackGround() == false) {
 		return -1;
 	}
-	const char* name = "map1.txt";
 	GameMap game_map;
-	game_map.LoadMap(name);
+	game_map.LoadMap("map1.txt");
 	game_map.LoadTiles(gscreen);
 
 	Player player1;
