@@ -2,8 +2,7 @@
 #include "BaseObj.h"
 #include <iostream>
 #include "gamemap.h"
-#include "Player1.h"
-#include "Player2.h"
+#include "Player.h"
 #include "ImpTimer.h"
 #include "Text.h"
 #include "Menu.h"
@@ -11,6 +10,8 @@
 
 
 #include <iostream>
+
+
 using namespace std;
 BaseObj background;
 TTF_Font *mainfont;
@@ -96,20 +97,21 @@ int main(int arcs, char* argv[]) {
 	if (LoadBackGround() == false) {
 		return -1;
 	}
+	const char* name = "map1.txt";
 	GameMap game_map;
-	game_map.LoadMap("map1.txt");
+	game_map.LoadMap(name);
 	game_map.LoadTiles(gscreen);
 
-	Player1 player1;
+	Player player1;
 	player1.LoadImg("assets/player1.png", gscreen);
 	player1.setclip();
 
-	Player2 player2;
+	Player player2;
 	player2.LoadImg("assets/player2.png", gscreen);
 	player2.setclip();
 
 	OtherObj cutemus;
-	cutemus.getPos(1000,640);
+	cutemus.getPos(1400,640);
     cutemus.LoadImg("assets/mushroom.png", gscreen, 48);
 	cutemus.getNum(4);
 	cutemus.setclip();
@@ -124,7 +126,7 @@ int main(int arcs, char* argv[]) {
 
 	Text menu_text;
 	menu_text.SetColor(Text::PINK);
-	menu_text.SetText("Hello!");
+	menu_text.SetText("Level 1");
 	menu_text.LoadFont(mainfont, gscreen);
 
 	Menu menu;
@@ -132,6 +134,7 @@ int main(int arcs, char* argv[]) {
 	bool isRunning = false;
 	if (menu.loadMenu(gscreen, mainfont) == 0) {
 		isRunning = true;
+		Mix_PlayMusic(background_music, -1);
 		quit = false;
 	}
 	if (menu.loadMenu(gscreen, mainfont) == QUIT) {
@@ -148,13 +151,13 @@ int main(int arcs, char* argv[]) {
 				switch (event.key.keysym.sym) {
 				case SDLK_0:
 					if (Mix_PlayingMusic() == 0) {
-						Mix_PlayMusic(background_music, -1);
 					}
 					break;
 				}
 			}
-			player1.handleEvent(event, gscreen,sound);
-			player2.handleEvent(event, gscreen, sound);
+			
+			player1.handleEvent1(event, gscreen,sound);
+			player2.handleEvent2(event, gscreen, sound);
 		}
 		SDL_SetRenderDrawColor(gscreen, 255, 255, 255,255);
 		SDL_RenderClear(gscreen);
@@ -164,11 +167,12 @@ int main(int arcs, char* argv[]) {
 		Map map_data = game_map.getMap();
 
 
-		player1.DoPlayer(map_data);
-		player1.show(gscreen);
+		player1.DoPlayer(map_data,0);
+		player1.show1(gscreen);
 
-		player2.DoPlayer(map_data);
-		player2.show(gscreen);
+		player2.DoPlayer(map_data,1);
+		player2.show2(gscreen);
+
 
 		cutemus.show(gscreen);
 
@@ -177,7 +181,10 @@ int main(int arcs, char* argv[]) {
 		game_map.SetMap(map_data);
 		game_map.DrawMap(gscreen);
 		
-		
+		if (player1.checkNextLevelP1()==true && player2.checkNextLevelP2()==true) {
+			cout << "NEXT!"<<endl;
+			game_map.LoadMap("map2.txt");
+		}
 
 		int real_time = fps_timer.get_tick();
 		int time_per_frame = 1000 / FPS;

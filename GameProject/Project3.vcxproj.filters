@@ -30,9 +30,6 @@
     <ClCompile Include="gamemap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ImpTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,10 +39,13 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player2.cpp">
+    <ClCompile Include="OtherObj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OtherObj.cpp">
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapFiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,9 +59,6 @@
     <ClInclude Include="gamemap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ImpTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -71,10 +68,13 @@
     <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player2.h">
+    <ClInclude Include="OtherObj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OtherObj.h">
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapFiles.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt" />
+    <Text Include="map2.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\map\map1.dat" />
