@@ -1,11 +1,52 @@
 #pragma once
+#include <SDL.h>
 #include <iostream>
 using namespace std;
 
-struct MapFiles
+class MapFiles
 {
+public:
 	string mapfile;
-	struct Node* nextlevel;
-	struct Node* prevlevel;
+	//SDL_Rect p1pos, p2pos, muspos, gatepos;
+	MapFiles* nextlevel;
+
+
+	MapFiles(string map, MapFiles* next) {
+		mapfile = map;
+		nextlevel = next;
+	}
+
 };
 
+
+class Map_LinkedList
+{
+
+public:
+	MapFiles* head;
+	Map_LinkedList()
+	{
+		this->head = NULL;
+	}
+
+	MapFiles* getHead()
+	{
+		return head;
+	}
+	Map_LinkedList* insertAtTail(string data) {
+		MapFiles* tmp;
+		tmp = new MapFiles(data, NULL);
+		if (head == NULL) {
+			head = tmp;
+		}
+		else {
+			MapFiles* p = head;
+			while (p->nextlevel != NULL) {
+				p = p->nextlevel;
+
+			}
+			p->nextlevel = tmp;
+		}
+		return this;
+	}
+};
