@@ -9,7 +9,8 @@
 #define JUMP_VAL 9
 #define PINK_FISH 5
 #define POISON 4
-
+#define PINK_LIQUID 7
+#define BLACK_LIQUID 8
 
 class Player : public BaseObj
 {
@@ -34,8 +35,9 @@ public:
 	
 	void DoPlayer(Map& mapdata,int p);
 
-	void CheckToMap(Map& mapdata);
-
+	void CheckToMap1(Map& mapdata);
+	void CheckToMap2(Map& mapdata);
+	
 	void CheckToMus();
 
 	void CheckToGate(int p);
@@ -44,6 +46,7 @@ public:
 	void UpdateImgPlayer2(SDL_Renderer* des);
 
 	void IncreasePowerPlayer1();
+	void IncreasePowerPlayer2();
 
 	void nextLevel(bool check) {
 		check = true;
@@ -56,11 +59,15 @@ public:
 		return nextLevelPlayer[1];
 	}
 	
+	bool GameOver1(){ return gameover;}
+    bool GameOver2(){ return gameover;}
+
 
 private:
 
 	int pinkfishcount;
-
+	int blackfishcount;
+	
 	float xval;
 	float yval;
 
@@ -79,6 +86,6 @@ private:
 	int frame;
 	int status;
 	bool onground=false;
-
+	bool gameover=false;
 };
 

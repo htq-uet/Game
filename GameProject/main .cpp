@@ -7,7 +7,7 @@
 #include "Text.h"
 #include "Menu.h"
 #include "OtherObj.h"
-
+#include "GameOver.h"
 
 #include <iostream>
 
@@ -139,6 +139,9 @@ int main(int arcs, char* argv[]) {
 	if (menu.loadMenu(gscreen, mainfont) == QUIT) {
 		quit = true;
 	}
+	
+	GameOver _gameover;
+	
 	while (!quit && isRunning) {
 		
 		fps_timer.start();
@@ -185,6 +188,16 @@ int main(int arcs, char* argv[]) {
 			game_map.LoadMap("map2.txt");
 		}
 
+
+		if (player1.GameOver1()||player2.GameOver2()){                
+                if (_gameover.getCFWR()==0){
+                    isRunning = true;
+                    quit = false;
+                }
+                if (_gameover.isQuit()) quit = true;
+				_gameover.loadGameOver(gscreen, mainfont);
+			}
+			
 		int real_time = fps_timer.get_tick();
 		int time_per_frame = 1000 / FPS;
 

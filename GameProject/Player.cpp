@@ -304,7 +304,7 @@ void Player::DoPlayer(Map& mapdata, int p) {
 	CheckToMus();
 	CheckToGate(p);
 }
-void Player::CheckToMap(Map& mapdata) {
+void Player::CheckToMap1(Map& mapdata) {
 	int x1 = 0;
 	int x2 = 0;
 
@@ -338,6 +338,7 @@ void Player::CheckToMap(Map& mapdata) {
 					xpos = (x2)*TILE_SIZE;
 					xpos -= widthframe * 3 - 10;
 					xval = 0;
+					if (mapdata.tile[y2][x2] == BLACK_LIQUID ) gameover = true;
 				}
 			}
 		}
@@ -355,6 +356,7 @@ void Player::CheckToMap(Map& mapdata) {
 				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y2][x1] != BLANK_TILE) {
 					xpos = (x1)*TILE_SIZE + 20;
 					xval = 0;
+					if (mapdata.tile[y2][x1] == BLACK_LIQUID) gameover = true;
 				}
 			}
 		}
@@ -383,6 +385,134 @@ void Player::CheckToMap(Map& mapdata) {
 					ypos -= heightframe * 3 - 17;
 					yval = 0;
 					onground = true;
+					if (mapdata.tile[y2][x1] == BLACK_LIQUID )
+                    {
+                        gameover = true;
+                    }
+				}
+			}
+		}
+		else if (yval < 0) {
+
+			if (mapdata.tile[y1][x2] == PINK_FISH) {
+				mapdata.tile[y1][x2] = 0;
+				IncreasePowerPlayer1();
+			}
+			else if (mapdata.tile[y1][x1] == PINK_FISH) { 
+				mapdata.tile[y1][x1] = 0; 
+				IncreasePowerPlayer1();
+			}
+			else{
+			if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y1][x2] != BLANK_TILE) {
+				ypos = (y1)*TILE_SIZE+5;
+				yval = 0;
+				}
+			}
+		}
+	}
+
+	
+	xpos += xval;
+	ypos += yval;
+	if (xpos < 0) {
+		xpos = 0;
+	}
+	else if ((xpos + widthframe*3) > mapdata.maxx) {
+		xpos = mapdata.maxx - widthframe*3 -1;
+	}
+
+	if (ypos < 0) {
+		ypos = 0;
+	}
+	
+}
+
+void Player::CheckToMap2(Map& mapdata) //check meo den
+{
+	int x1 = 0;
+	int x2 = 0;
+
+	int y1 = 0;
+	int y2 = 0;
+
+
+	//check horizontal  
+	int height_min = (heightframe * 3 < TILE_SIZE ? heightframe * 3 : TILE_SIZE); 
+
+	x1 = (xpos+xval+10)/TILE_SIZE;
+	x2 = (xpos + xval + widthframe*3 -10)/ TILE_SIZE;
+
+	y1 = (ypos+30) / TILE_SIZE;
+	y2 = (ypos + height_min +20) / TILE_SIZE;
+
+	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
+		if (xval > 0) {
+
+			if (mapdata.tile[y1][x2] == PINK_FISH) {
+				mapdata.tile[y1][x2] = 0;
+				IncreasePowerPlayer1();
+			}
+			else if (mapdata.tile[y2][x2] == PINK_FISH) {
+				mapdata.tile[y2][x2] = 0;
+				IncreasePowerPlayer1();
+			}
+
+			else {
+				if ((mapdata.tile[y1][x2] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE)) {
+					xpos = (x2)*TILE_SIZE;
+					xpos -= widthframe * 3 - 10;
+					xval = 0;
+					if (mapdata.tile[y2][x2] == PINK_LIQUID ) gameover = true;
+				}
+			}
+		}
+		else if (xval < 0) {
+
+			if (mapdata.tile[y2][x1] == PINK_FISH) {
+				mapdata.tile[y2][x1] = 0;
+				IncreasePowerPlayer1();
+			}
+			else if (mapdata.tile[y1][x1] == PINK_FISH) {
+				mapdata.tile[y1][x1] = 0;
+				IncreasePowerPlayer1();
+			}
+			else {
+				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y2][x1] != BLANK_TILE) {
+					xpos = (x1)*TILE_SIZE + 20;
+					xval = 0;
+					if (mapdata.tile[y2][x1] == PINK_LIQUID) gameover = true;
+				}
+			}
+		}
+	}
+	//check vertical
+	int width_min = widthframe*3< TILE_SIZE ? widthframe*3 : TILE_SIZE;
+	x1 = (xpos+25) / TILE_SIZE;
+	x2 = (xpos + width_min+40) / TILE_SIZE;
+
+	y1 = (ypos + yval) / TILE_SIZE;
+	y2 = (ypos + yval + heightframe*3 -17) / TILE_SIZE;
+
+	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
+		if (yval > 0) {
+			if (mapdata.tile[y2][x2] == PINK_FISH) {
+				mapdata.tile[y2][x2] = 0;
+				IncreasePowerPlayer1();
+			}
+			else if (mapdata.tile[y2][x1] == PINK_FISH) { 
+				mapdata.tile[y2][x1] = 0; 
+				IncreasePowerPlayer1();
+			}
+			else {
+				if (mapdata.tile[y2][x1] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE) {
+					ypos = y2 * TILE_SIZE;
+					ypos -= heightframe * 3 - 17;
+					yval = 0;
+					onground = true;
+					if (mapdata.tile[y2][x1] == PINK_LIQUID )
+                    {
+                        gameover = true;
+                    }
 				}
 			}
 		}
@@ -424,6 +554,11 @@ void Player::CheckToMap(Map& mapdata) {
 void Player::IncreasePowerPlayer1() {
 	pinkfishcount++;
 }
+
+void Player::IncreasePowerPlayer2() {
+	blackfishcount++;
+}
+
 void Player::UpdateImgPlayer1(SDL_Renderer* des) {
 	if (onground) {
 		if (input_type.left==1) {
