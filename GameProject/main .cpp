@@ -235,8 +235,8 @@ int main(int arcs, char* argv[]) {
 
 			if (player1.checkNextLevelP1() == true && player2.checkNextLevelP2() == true) {
 				cout << "NEXT!" << endl;
-				mllist->nextNode();
-				string s = mllist->getHead()->mapfile;
+				//mllist->nextNode();
+				string s = tmp->nextlevel->mapfile;
 				const char* v = s.c_str();
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);

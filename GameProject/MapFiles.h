@@ -20,9 +20,9 @@ public:
 
 class Map_LinkedList
 {
+	MapFiles* head;
 
 public:
-	MapFiles* head;
 	Map_LinkedList()
 	{
 		this->head = NULL;
@@ -50,6 +50,7 @@ public:
 	}
 	void nextNode()
 	{
+		if(head->nextlevel!=NULL)
 		head = head->nextlevel;
 	}
 };
