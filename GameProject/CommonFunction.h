@@ -20,6 +20,7 @@ const int ColorKeyGreen = 175;
 const int ColorKeyBlue = 180;
 
 #define QUIT 2
+#define SPACE 10
 #define TILE_SIZE 32
  
 #define MAP_MAP_X 55
