@@ -137,10 +137,7 @@ int main(int arcs, char* argv[]) {
 
 
 
-	Text menu_text;
-	menu_text.SetColor(Text::PINK);
-	menu_text.SetText("Level " + to_string(k));
-	menu_text.LoadFont(mainfont, gscreen);
+	
 
 	Menu menu;
 	bool quit = false;
@@ -166,6 +163,10 @@ int main(int arcs, char* argv[]) {
 			
 			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
 				SDL_RenderClear(gscreen);
+				string s = mllist->getHead()->mapfile;
+				const char* c = s.c_str();
+				game_map.LoadMap(c);
+				game_map.LoadTiles(gscreen);
 				player1.setPos(332, 662);
 				player2.setPos(332, 662);
 				player1.changeState();
@@ -204,6 +205,7 @@ int main(int arcs, char* argv[]) {
 						break;
 					}
 				}
+				
 				player1.changeState();
 				player2.changeState();
 				player1.handleEvent1(event, gscreen, sound);
@@ -233,8 +235,8 @@ int main(int arcs, char* argv[]) {
 
 			if (player1.checkNextLevelP1() == true && player2.checkNextLevelP2() == true) {
 				cout << "NEXT!" << endl;
-
-				string s = tmp->nextlevel->mapfile;
+				mllist->nextNode();
+				string s = mllist->getHead()->mapfile;
 				const char* v = s.c_str();
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);
@@ -249,7 +251,7 @@ int main(int arcs, char* argv[]) {
 
 
 
-			menu_text.RenderText(gscreen, 800, 15);
+			//menu_text.RenderText(gscreen, 800, 15);
 
 
 			SDL_RenderPresent(gscreen);
@@ -262,6 +264,6 @@ int main(int arcs, char* argv[]) {
 		}
 	}
 	close();
-	menu_text.Free();
+	//menu_text.Free();
 	return 0;
 }

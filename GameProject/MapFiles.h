@@ -48,4 +48,8 @@ public:
 		}
 		return this;
 	}
+	void nextNode()
+	{
+		head = head->nextlevel;
+	}
 };
