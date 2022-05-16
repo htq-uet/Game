@@ -7,10 +7,10 @@
 #include "Text.h"
 #include "Menu.h"
 #include "OtherObj.h"
-
+#include "MapFiles.h"
 
 #include <iostream>
-
+#include <string>
 
 using namespace std;
 BaseObj background;
@@ -97,8 +97,18 @@ int main(int arcs, char* argv[]) {
 	if (LoadBackGround() == false) {
 		return -1;
 	}
+	Map_LinkedList* mllist = new Map_LinkedList();
+	
+	mllist->insertAtTail("map1.txt");
+	mllist->insertAtTail("map2.txt");
+
+	MapFiles* tmp = mllist->getHead();
+
 	GameMap game_map;
-	game_map.LoadMap("map1.txt");
+	int k = 1;
+	string s = mllist->getHead()->mapfile;
+	const char* c = s.c_str();
+	game_map.LoadMap(c);
 	game_map.LoadTiles(gscreen);
 
 	Player player1;
@@ -125,79 +135,99 @@ int main(int arcs, char* argv[]) {
 
 	Text menu_text;
 	menu_text.SetColor(Text::PINK);
-	menu_text.SetText("Level 1");
+	menu_text.SetText("Level " + to_string(k));
 	menu_text.LoadFont(mainfont, gscreen);
 
 	Menu menu;
 	bool quit = false;
 	bool isRunning = false;
+	bool isToturial = false;
+	bool isGameOver = false;
 	if (menu.loadMenu(gscreen, mainfont) == 0) {
 		isRunning = true;
+		isToturial = false;
+		isGameOver = false;
 		Mix_PlayMusic(background_music, -1);
 		quit = false;
 	}
 	if (menu.loadMenu(gscreen, mainfont) == QUIT) {
 		quit = true;
 	}
-	while (!quit && isRunning) {
-		
-		fps_timer.start();
-		while (SDL_PollEvent(&event) != 0) {
-			if (event.type == SDL_QUIT) {
-				quit = true;
-			}
-			else if (event.type == SDL_KEYDOWN) {
-				switch (event.key.keysym.sym) {
-				case SDLK_0:
-					if (Mix_PlayingMusic() == 0) {
-					}
-					break;
+	while (!quit) {
+		if (isGameOver)
+		{
+
+		}
+
+		if (isToturial)
+		{
+
+		}
+
+		if (isRunning)
+		{
+			fps_timer.start();
+			while (SDL_PollEvent(&event) != 0) {
+				if (event.type == SDL_QUIT) {
+					quit = true;
 				}
+				else if (event.type == SDL_KEYDOWN) {
+					switch (event.key.keysym.sym) {
+					case SDLK_0:
+						if (Mix_PlayingMusic() == 0) {
+						}
+						break;
+					}
+				}
+
+				player1.handleEvent1(event, gscreen, sound);
+				player2.handleEvent2(event, gscreen, sound);
 			}
-			
-			player1.handleEvent1(event, gscreen,sound);
-			player2.handleEvent2(event, gscreen, sound);
-		}
-		SDL_SetRenderDrawColor(gscreen, 255, 255, 255,255);
-		SDL_RenderClear(gscreen);
+			SDL_SetRenderDrawColor(gscreen, 255, 255, 255, 255);
+			SDL_RenderClear(gscreen);
 
-		background.Render(gscreen, NULL);
-		
-		Map map_data = game_map.getMap();
+			background.Render(gscreen, NULL);
+
+			Map map_data = game_map.getMap();
 
 
-		player1.DoPlayer(map_data,0);
-		player1.show1(gscreen);
+			player1.DoPlayer(map_data, 0);
+			player1.show1(gscreen);
 
-		player2.DoPlayer(map_data,1);
-		player2.show2(gscreen);
-
-
-		cutemus.show(gscreen);
-
-		gate.show(gscreen);
-		
-		game_map.SetMap(map_data);
-		game_map.DrawMap(gscreen);
-		
-		if (player1.checkNextLevelP1()==true && player2.checkNextLevelP2()==true) {
-			cout << "NEXT!"<<endl;
-			game_map.LoadMap("map2.txt");
-		}
-
-		int real_time = fps_timer.get_tick();
-		int time_per_frame = 1000 / FPS;
-
-		
-		
-		menu_text.RenderText(gscreen, 800, 15);
+			player2.DoPlayer(map_data, 1);
+			player2.show2(gscreen);
 
 
-		SDL_RenderPresent(gscreen);
-		if (real_time < time_per_frame) {
-			int delay = time_per_frame - real_time;
-			if (delay >= 0) {
-				SDL_Delay(delay);
+			cutemus.show(gscreen);
+
+			gate.show(gscreen);
+
+			game_map.SetMap(map_data);
+			game_map.DrawMap(gscreen);
+
+			if (player1.checkNextLevelP1() == true && player2.checkNextLevelP2() == true) {
+				cout << "NEXT!" << endl;
+
+				string s = tmp->nextlevel->mapfile;
+				const char* v = s.c_str();
+				game_map.LoadMap(v);
+				game_map.LoadTiles(gscreen);
+			}
+
+			int real_time = fps_timer.get_tick();
+			int time_per_frame = 1000 / FPS;
+
+
+
+			menu_text.RenderText(gscreen, 800, 15);
+
+
+			SDL_RenderPresent(gscreen);
+			if (real_time < time_per_frame) {
+				int delay = time_per_frame - real_time;
+				if (delay >= 0) {
+					SDL_Delay(delay);
+				}
 			}
 		}
 	}
