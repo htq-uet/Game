@@ -30,8 +30,8 @@ public:
 	void show2(SDL_Renderer* des);
 	void handleEvent1(SDL_Event e, SDL_Renderer* renderer,Mix_Chunk* sound[5]);
 	void handleEvent2(SDL_Event e, SDL_Renderer* renderer, Mix_Chunk* sound[5]);
-	void setclip(); 
-	
+	void setclip();
+
 	void DoPlayer(Map& mapdata,int p);
 
 	void CheckToMap(Map& mapdata);
@@ -55,7 +55,7 @@ public:
 	bool checkNextLevelP2() {
 		return nextLevelPlayer[1];
 	}
-	
+
 
 private:
 
@@ -81,4 +81,3 @@ private:
 	bool onground=false;
 
 };
-

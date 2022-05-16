@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "OtherObj.h"
-Player::Player() 
+Player::Player()
 {
 	frame = 0;
 	xpos = 332;
@@ -77,7 +77,7 @@ void Player::show1(SDL_Renderer* des) {
 		if (frame >= 0) {
 			++frame;
 		}
-		
+
 	}
 	else {
 		frame = 0;
@@ -85,11 +85,11 @@ void Player::show1(SDL_Renderer* des) {
 	if (input_type.jump == 1) {
 		frame = 0;
 	}
-	
+
 	 if (frame / 6 >= 6) {
 		frame=0;
 	}
-	
+
 	rect.x = xpos;
 	rect.y = ypos;
 
@@ -148,17 +148,17 @@ void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			input_type.stayright = 0;
 			input_type.right = 1;
 			input_type.left = 0;
-			
+
 			UpdateImgPlayer1(renderer);
 			break;
 
-		case SDLK_a: 
+		case SDLK_a:
 			status = WALK_LEFT;
 			input_type.stayleft = 0;
 			input_type.stayright = 0;
 			input_type.left = 1;
 			input_type.right = 0;
-			
+
 			UpdateImgPlayer1(renderer);
 
 			break;
@@ -178,7 +178,7 @@ void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 	}
 	else if (e.type == SDL_KEYUP) {
 		switch (e.key.keysym.sym) {
-		case SDLK_d: 
+		case SDLK_d:
 			status = STAY_RIGHT;
 			if (onground == true) {
 				input_type.stayright = 1;
@@ -187,11 +187,11 @@ void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			}
 			input_type.right = 0;
 			input_type.stayleft = 0;
-			
+
 			UpdateImgPlayer1(renderer);
 
 			break;
-		case SDLK_a: 
+		case SDLK_a:
 			status = STAY_LEFT;
 			if (onground == true) {
 				input_type.stayleft = 1;
@@ -200,7 +200,7 @@ void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			}
 			input_type.left = 0;
 			input_type.stayright = 0;
-			
+
 			UpdateImgPlayer1(renderer);
 
 			break;
@@ -312,8 +312,8 @@ void Player::CheckToMap(Map& mapdata) {
 	int y2 = 0;
 
 
-	//check horizontal  
-	int height_min = (heightframe * 3 < TILE_SIZE ? heightframe * 3 : TILE_SIZE); 
+	//check horizontal
+	int height_min = (heightframe * 3 < TILE_SIZE ? heightframe * 3 : TILE_SIZE);
 
 	x1 = (xpos+xval+10)/TILE_SIZE;
 	x2 = (xpos + xval + widthframe*3 -10)/ TILE_SIZE;
@@ -373,8 +373,8 @@ void Player::CheckToMap(Map& mapdata) {
 				mapdata.tile[y2][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x1] == PINK_FISH) { 
-				mapdata.tile[y2][x1] = 0; 
+			else if (mapdata.tile[y2][x1] == PINK_FISH) {
+				mapdata.tile[y2][x1] = 0;
 				IncreasePowerPlayer1();
 			}
 			else {
@@ -392,8 +392,8 @@ void Player::CheckToMap(Map& mapdata) {
 				mapdata.tile[y1][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y1][x1] == PINK_FISH) { 
-				mapdata.tile[y1][x1] = 0; 
+			else if (mapdata.tile[y1][x1] == PINK_FISH) {
+				mapdata.tile[y1][x1] = 0;
 				IncreasePowerPlayer1();
 			}
 			else{
@@ -405,7 +405,7 @@ void Player::CheckToMap(Map& mapdata) {
 		}
 	}
 
-	
+
 	xpos += xval;
 	ypos += yval;
 	if (xpos < 0) {
@@ -418,7 +418,7 @@ void Player::CheckToMap(Map& mapdata) {
 	if (ypos < 0) {
 		ypos = 0;
 	}
-	
+
 }
 
 void Player::IncreasePowerPlayer1() {
@@ -438,7 +438,7 @@ void Player::UpdateImgPlayer1(SDL_Renderer* des) {
 		else if (status == STAY_RIGHT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
 			LoadImg("assets/stayright.png",des);
 		}
-		
+
 	}
 	else {
 		if (input_type.left == 1) {
@@ -516,7 +516,7 @@ void Player::CheckToMus() {
 				xpos = x2 + 82;
 				xpos -= widthframe * 3 + 56;
 				xval = 0;
-			
+
 			}
 			else if (xval < 0) {
 				xpos = x1 - 26;
@@ -561,7 +561,7 @@ void Player::CheckToMus() {
 			}
 		}
 
-		
+
 	}
 }
 void Player::CheckToGate(int p)
@@ -633,6 +633,5 @@ void Player::CheckToGate(int p)
 				cout << "nextlevel"<<p+1;
 			}
 		}
-	}	
+	}
 }
-

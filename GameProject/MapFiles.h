@@ -52,3 +52,35 @@ public:
 	
 };
 
+
+class Map_LinkedList
+{
+
+public:
+	MapFiles* head;
+	Map_LinkedList()
+	{
+		this->head = NULL;
+	}
+
+	MapFiles* getHead()
+	{
+		return head;
+	}
+	Map_LinkedList* insertAtTail(string data) {
+		MapFiles* tmp;
+		tmp = new MapFiles(data, NULL);
+		if (head == NULL) {
+			head = tmp;
+		}
+		else {
+			MapFiles* p = head;
+			while (p->nextlevel != NULL) {
+				p = p->nextlevel;
+
+			}
+			p->nextlevel = tmp;
+		}
+		return this;
+	}
+};

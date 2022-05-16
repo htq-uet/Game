@@ -55,7 +55,7 @@ bool init() {
 		cerr << "Sound Error!\n" << Mix_GetError();
 		success = false;
 	}
-	
+
 
 	return success;
 }
@@ -79,7 +79,7 @@ void close() {
 
 	TTF_Quit();
 
-	IMG_Quit(); 
+	IMG_Quit();
 	SDL_Quit();
 }
 
@@ -98,9 +98,9 @@ int main(int arcs, char* argv[]) {
 		return -1;
 	}
 	Map_LinkedList* mllist = new Map_LinkedList();
-	
-	mllist->insertAtTail("map1.txt");
-	mllist->insertAtTail("map2.txt");
+
+	mllist->insertAtTail("map/map1.txt");
+	mllist->insertAtTail("map/map2.txt");
 
 	MapFiles* tmp = mllist->getHead();
 
@@ -233,5 +233,5 @@ int main(int arcs, char* argv[]) {
 	}
 	close();
 	menu_text.Free();
-	return 0; 
+	return 0;
 }
