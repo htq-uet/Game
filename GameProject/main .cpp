@@ -8,6 +8,7 @@
 #include "Menu.h"
 #include "OtherObj.h"
 #include "MapFiles.h"
+#include "GameOver.h"
 
 #include <iostream>
 #include <string>
@@ -153,10 +154,17 @@ int main(int arcs, char* argv[]) {
 	if (menu.loadMenu(gscreen, mainfont) == QUIT) {
 		quit = true;
 	}
+	GameOver _gameover;
 	while (!quit) {
 		if (isGameOver)
 		{
-
+			if (_gameover.getCFWR() == 0) {
+				isRunning = true;
+				quit = false;
+				isGameOver = false;
+			}
+			if (_gameover.isQuit()) quit = true;
+			_gameover.loadGameOver(gscreen, mainfont);
 		}
 
 		if (isToturial)
@@ -191,10 +199,10 @@ int main(int arcs, char* argv[]) {
 			Map map_data = game_map.getMap();
 
 
-			player1.DoPlayer(map_data, 0);
+			player1.DoPlayer1(map_data, 0);
 			player1.show1(gscreen);
 
-			player2.DoPlayer(map_data, 1);
+			player2.DoPlayer2(map_data, 1);
 			player2.show2(gscreen);
 
 
@@ -212,6 +220,9 @@ int main(int arcs, char* argv[]) {
 				const char* v = s.c_str();
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);
+			}
+			if (player1.GameOver1()||player2.GameOver2()){                
+				isGameOver = true;
 			}
 
 			int real_time = fps_timer.get_tick();

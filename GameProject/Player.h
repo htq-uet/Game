@@ -9,6 +9,9 @@
 #define JUMP_VAL 9
 #define PINK_FISH 5
 #define POISON 4
+#define BLACK_FISH 6
+#define PINK_LIQUID 7
+#define BLACK_LIQUID 8
 
 
 class Player : public BaseObj
@@ -32,9 +35,11 @@ public:
 	void handleEvent2(SDL_Event e, SDL_Renderer* renderer, Mix_Chunk* sound[5]);
 	void setclip();
 
-	void DoPlayer(Map& mapdata,int p);
+	void DoPlayer1(Map& mapdata, int p);
+	void DoPlayer2(Map& mapdata, int p);
 
-	void CheckToMap(Map& mapdata);
+	void CheckToMap1(Map& mapdata);
+	void CheckToMap2(Map& mapdata);
 
 	void CheckToMus();
 
@@ -55,6 +60,8 @@ public:
 	bool checkNextLevelP2() {
 		return nextLevelPlayer[1];
 	}
+	bool GameOver1() { return gameover; }
+	bool GameOver2() { return gameover; }
 
 
 private:
@@ -79,5 +86,5 @@ private:
 	int frame;
 	int status;
 	bool onground=false;
-
+	bool gameover = false;
 };
