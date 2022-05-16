@@ -85,7 +85,7 @@ void close() {
 }
 
 int main(int arcs, char* argv[]) {
-	const int FPS = 60;
+	const int FPS = 36;
 	const int frameDelay = 1000 / FPS;
 	Uint32 framestart;
 	int frametime;
@@ -119,6 +119,9 @@ int main(int arcs, char* argv[]) {
 	Player player2;
 	player2.LoadImg("assets/player2.png", gscreen);
 	player2.setclip();
+
+	player1.setPos(332, 662);
+	player2.setPos(500, 662);
 
 	OtherObj cutemus;
 	cutemus.getPos(1400,640);
@@ -162,7 +165,7 @@ int main(int arcs, char* argv[]) {
 			cout << "GAMEOVER";
 			
 			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
-				
+				SDL_RenderClear(gscreen);
 				player1.setPos(332, 662);
 				player2.setPos(332, 662);
 				player1.changeState();

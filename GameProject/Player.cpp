@@ -354,12 +354,17 @@ void Player::CheckToMap1(Map& mapdata) {
 				mapdata.tile[y1][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
-			else if (mapdata.tile[y2][x2] == PINK_FISH) {
+			if (mapdata.tile[y2][x2] == PINK_FISH) {
 				mapdata.tile[y2][x2] = 0;
 				IncreasePowerPlayer1();
 			}
+			else if (mapdata.tile[y2][x2] == BLACK_LIQUID || mapdata.tile[y1][x2] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y1][x2] == POISON) gameoverState = 1;
 
+			else if (mapdata.tile[y1][x2] == BLACK_FISH || mapdata.tile[y2][x2] == BLACK_FISH) 
+			{ }
+			else if (mapdata.tile[y1][x2] == PINK_LIQUID || mapdata.tile[y2][x2] == PINK_LIQUID)
+			{ }
 			else {
 				if ((mapdata.tile[y1][x2] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE)) {
 					xpos = (x2)*TILE_SIZE;
@@ -370,16 +375,21 @@ void Player::CheckToMap1(Map& mapdata) {
 		}
 		else if (xval < 0) {
 
-			if (mapdata.tile[y2][x1] == PINK_FISH) {
+			if (mapdata.tile[y2][x1] == PINK_FISH ) {
 				mapdata.tile[y2][x1] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == BLACK_LIQUID || mapdata.tile[y2][x1] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y2][x1] == POISON) gameoverState = 1;
 
-			else if (mapdata.tile[y1][x1] == PINK_FISH) {
+			else if (mapdata.tile[y1][x1]==PINK_FISH) {
 				mapdata.tile[y1][x1] = 0;
 				IncreasePowerPlayer1();
 			}
+			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y2][x1] == BLACK_FISH)
+			{}
+			else if (mapdata.tile[y1][x1] == PINK_LIQUID || mapdata.tile[y2][x1] == PINK_LIQUID)
+			{}
 			else {
 				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y2][x1] != BLANK_TILE) {
 					xpos = (x1)*TILE_SIZE + 20;
@@ -402,12 +412,16 @@ void Player::CheckToMap1(Map& mapdata) {
 				mapdata.tile[y2][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x1] == BLACK_LIQUID || mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
 
 			else if (mapdata.tile[y2][x1] == PINK_FISH) {
 				mapdata.tile[y2][x1] = 0;
 				IncreasePowerPlayer1();
 			}
+			else if (mapdata.tile[y2][x1] == BLACK_FISH || mapdata.tile[y2][x2] == BLACK_FISH)
+			{}
+			else if (mapdata.tile[y2][x1] == PINK_LIQUID || mapdata.tile[y2][x2] == PINK_LIQUID)
+			{}
 			else {
 				if (mapdata.tile[y2][x1] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE) {
 					ypos = y2 * TILE_SIZE;
@@ -423,11 +437,18 @@ void Player::CheckToMap1(Map& mapdata) {
 				mapdata.tile[y1][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y1][x2] == BLACK_LIQUID&& mapdata.tile[y1][x1] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y1][x2] == POISON && mapdata.tile[y1][x1] == POISON) gameoverState = 1;
 
 			else if (mapdata.tile[y1][x1] == PINK_FISH) {
 				mapdata.tile[y1][x1] = 0;
 				IncreasePowerPlayer1();
+			}
+			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
+			{
+			}
+			else if (mapdata.tile[y1][x1] == PINK_LIQUID || mapdata.tile[y1][x2] == PINK_LIQUID)
+			{
 			}
 			else{
 			if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y1][x2] != BLANK_TILE) {
@@ -537,7 +558,12 @@ void Player::CheckToMap2(Map& mapdata) {
 				mapdata.tile[y2][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-
+			else if (mapdata.tile[y1][x2] == PINK_FISH || mapdata.tile[y2][x2] == PINK_FISH)
+			{
+			}
+			else if (mapdata.tile[y1][x2] == BLACK_LIQUID || mapdata.tile[y2][x2] == BLACK_LIQUID)
+			{
+			}
 			else {
 				if ((mapdata.tile[y1][x2] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE)) {
 					xpos = (x2)*TILE_SIZE;
@@ -552,14 +578,21 @@ void Player::CheckToMap2(Map& mapdata) {
 				mapdata.tile[y2][x1] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x1] == PINK_LIQUID || mapdata.tile[y1][x1] == PINK_LIQUID) gameoverState = 1;
 
 			else if (mapdata.tile[y1][x1] == BLACK_FISH) {
 				mapdata.tile[y1][x1] = 0;
 				IncreasePowerPlayer1();
 			}
+			else if (mapdata.tile[y1][x1] == PINK_FISH || mapdata.tile[y2][x1] == PINK_FISH)
+			{
+			}
+			else if (mapdata.tile[y1][x1] == BLACK_LIQUID || mapdata.tile[y2][x1] == BLACK_LIQUID)
+			{
+			}
 			else {
-				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y2][x1] != BLANK_TILE) {
+				if (mapdata.tile[y1][x1] != BLANK_TILE ||
+					mapdata.tile[y2][x1] != BLANK_TILE) {
 					xpos = (x1)*TILE_SIZE + 20;
 					xval = 0;
 				}
@@ -580,11 +613,18 @@ void Player::CheckToMap2(Map& mapdata) {
 				mapdata.tile[y2][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == PINK_LIQUID || mapdata.tile[y2][x1] ==PINK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y2][x1] == POISON) gameoverState = 1;
 
 			else if (mapdata.tile[y2][x1] == BLACK_FISH) {
 				mapdata.tile[y2][x1] = 0;
 				IncreasePowerPlayer1();
+			}
+			else if (mapdata.tile[y2][x1] == PINK_FISH || mapdata.tile[y2][x2] == PINK_FISH)
+			{
+			}
+			else if (mapdata.tile[y2][x1] == BLACK_LIQUID || mapdata.tile[y2][x2] == BLACK_LIQUID)
+			{
 			}
 			else {
 				if (mapdata.tile[y2][x1] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE) {
@@ -601,11 +641,18 @@ void Player::CheckToMap2(Map& mapdata) {
 				mapdata.tile[y1][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y1][x1] == PINK_LIQUID || mapdata.tile[y1][x2] == PINK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y1][x1] == POISON || mapdata.tile[y1][x2] == POISON) gameoverState = 1;
 
 			else if (mapdata.tile[y1][x1] == BLACK_FISH) {
 				mapdata.tile[y1][x1] = 0;
 				IncreasePowerPlayer1();
+			}
+			else if (mapdata.tile[y1][x1] == PINK_FISH || mapdata.tile[y1][x2] == PINK_FISH)
+			{
+			}
+			else if (mapdata.tile[y1][x1] == BLACK_LIQUID || mapdata.tile[y1][x2] == BLACK_LIQUID)
+			{
 			}
 			else {
 				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y1][x2] != BLANK_TILE) {
