@@ -8,7 +8,7 @@ class GameOver:public BaseObj
         GameOver();
         ~GameOver();
 
-        void loadGameOver(SDL_Renderer* renderer, TTF_Font* font);
+        int loadGameOver(SDL_Renderer* renderer, TTF_Font* font);
         bool CheckFocusWithRectGO(const int& x, const int& y, const SDL_Rect& rect);
         int getCFWR(){ return check;}
         bool isQuit(){ return quit_;}

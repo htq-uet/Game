@@ -141,40 +141,54 @@ int main(int arcs, char* argv[]) {
 
 	Menu menu;
 	bool quit = false;
-	bool isRunning = false;
-	bool isToturial = false;
-	bool isGameOver = false;
+	int state=0;
+	enum STATE {
+		isPlaying = 1,
+		isGameover = 2,
+		isToturial = 3,
+	};
+	
 	if (menu.loadMenu(gscreen, mainfont) == 0) {
-		isRunning = true;
-		isToturial = false;
-		isGameOver = false;
 		Mix_PlayMusic(background_music, -1);
-		quit = false;
+		state = isPlaying;
 	}
 	if (menu.loadMenu(gscreen, mainfont) == QUIT) {
 		quit = true;
 	}
 	GameOver _gameover;
 	while (!quit) {
-		if (isGameOver)
-		{
-			if (_gameover.getCFWR() == 0) {
-				isRunning = true;
-				quit = false;
-				isGameOver = false;
+		if (state==isGameover)
+		{	
+			cout << "GAMEOVER";
+			
+			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
+				
+				player1.setPos(332, 662);
+				player2.setPos(332, 662);
+				player1.changeState();
+				player2.changeState();
+
+				state = isPlaying;
+
 			}
-			if (_gameover.isQuit()) quit = true;
-			_gameover.loadGameOver(gscreen, mainfont);
+			else if (_gameover.loadGameOver(gscreen, mainfont) == QUIT) {
+				quit = true;
+			}
+			else if (_gameover.isQuit()) quit = true;
+			if (event.type == SDL_QUIT) {
+				quit = true;
+			}
 		}
 
-		if (isToturial)
+		else if (state==isToturial)
 		{
 
 		}
 
-		if (isRunning)
+		else if (state==isPlaying)
 		{
 			fps_timer.start();
+		
 			while (SDL_PollEvent(&event) != 0) {
 				if (event.type == SDL_QUIT) {
 					quit = true;
@@ -187,7 +201,8 @@ int main(int arcs, char* argv[]) {
 						break;
 					}
 				}
-
+				player1.changeState();
+				player2.changeState();
 				player1.handleEvent1(event, gscreen, sound);
 				player2.handleEvent2(event, gscreen, sound);
 			}
@@ -221,8 +236,9 @@ int main(int arcs, char* argv[]) {
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);
 			}
-			if (player1.GameOver1()||player2.GameOver2()){                
-				isGameOver = true;
+			if (player1.GameOver1()==1||player2.GameOver2()==1){                
+				state = isGameover;
+
 			}
 
 			int real_time = fps_timer.get_tick();

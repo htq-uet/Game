@@ -49,7 +49,11 @@ public:
 	void UpdateImgPlayer2(SDL_Renderer* des);
 
 	void IncreasePowerPlayer1();
-
+	void setPos(float x,float y)
+	{
+		xpos = x;
+		ypos = y;
+	}
 	void nextLevel(bool check) {
 		check = true;
 	}
@@ -60,9 +64,14 @@ public:
 	bool checkNextLevelP2() {
 		return nextLevelPlayer[1];
 	}
-	bool GameOver1() { return gameover; }
-	bool GameOver2() { return gameover; }
-
+	int GameOver1() { return gameoverState; }
+	int GameOver2() { return gameoverState; }
+	void changeState() {
+		if (gameoverState == 1)
+		{
+			gameoverState = 0;
+		}
+	}
 
 private:
 
@@ -86,5 +95,5 @@ private:
 	int frame;
 	int status;
 	bool onground=false;
-	bool gameover = false;
+	int gameoverState=0;
 };

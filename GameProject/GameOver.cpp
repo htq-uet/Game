@@ -33,7 +33,7 @@ void ChangeColorGO(const int& index, const int& color, SDL_Renderer* renderer, T
 	text_go[index].LoadFont(font, renderer);
 }
 
-void GameOver::loadGameOver(SDL_Renderer* renderer, TTF_Font* font) {
+int GameOver::loadGameOver(SDL_Renderer* renderer, TTF_Font* font) {
 
 
 
@@ -85,13 +85,13 @@ void GameOver::loadGameOver(SDL_Renderer* renderer, TTF_Font* font) {
 
 				if (CheckFocusWithRectGO(xG, yG, text_go[0].GetRect()))
 					{
-						check = 0;
+					return 0;
 					}
 			}
 			case SDL_KEYDOWN:
 				if (GOevent.key.keysym.sym == SDLK_ESCAPE)
 				{
-					quit_ = true;
+					return QUIT;
 				}
 			default:
 				break;
@@ -99,7 +99,7 @@ void GameOver::loadGameOver(SDL_Renderer* renderer, TTF_Font* font) {
 		}
 		SDL_RenderPresent(renderer);
     }
-		quit_ = true;
+	return QUIT;
 }
 
 

@@ -354,7 +354,7 @@ void Player::CheckToMap1(Map& mapdata) {
 				mapdata.tile[y1][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameover = true;
+			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
 			else if (mapdata.tile[y2][x2] == PINK_FISH) {
 				mapdata.tile[y2][x2] = 0;
 				IncreasePowerPlayer1();
@@ -374,7 +374,7 @@ void Player::CheckToMap1(Map& mapdata) {
 				mapdata.tile[y2][x1] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameover = true;
+			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
 
 			else if (mapdata.tile[y1][x1] == PINK_FISH) {
 				mapdata.tile[y1][x1] = 0;
@@ -402,7 +402,7 @@ void Player::CheckToMap1(Map& mapdata) {
 				mapdata.tile[y2][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameover = true;
+			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
 
 			else if (mapdata.tile[y2][x1] == PINK_FISH) {
 				mapdata.tile[y2][x1] = 0;
@@ -423,7 +423,7 @@ void Player::CheckToMap1(Map& mapdata) {
 				mapdata.tile[y1][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameover = true;
+			else if (mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
 
 			else if (mapdata.tile[y1][x1] == PINK_FISH) {
 				mapdata.tile[y1][x1] = 0;
@@ -532,7 +532,7 @@ void Player::CheckToMap2(Map& mapdata) {
 				mapdata.tile[y1][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameover = true;
+			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameoverState = 1;
 			else if (mapdata.tile[y2][x2] == PINK_FISH) {
 				mapdata.tile[y2][x2] = 0;
 				IncreasePowerPlayer1();
@@ -552,7 +552,7 @@ void Player::CheckToMap2(Map& mapdata) {
 				mapdata.tile[y2][x1] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameover = true;
+			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameoverState = 1;
 
 			else if (mapdata.tile[y1][x1] == BLACK_FISH) {
 				mapdata.tile[y1][x1] = 0;
@@ -580,7 +580,7 @@ void Player::CheckToMap2(Map& mapdata) {
 				mapdata.tile[y2][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameover = true;
+			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameoverState = 1;
 
 			else if (mapdata.tile[y2][x1] == BLACK_FISH) {
 				mapdata.tile[y2][x1] = 0;
@@ -601,7 +601,7 @@ void Player::CheckToMap2(Map& mapdata) {
 				mapdata.tile[y1][x2] = 0;
 				IncreasePowerPlayer1();
 			}
-			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameover = true;
+			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameoverState = 1;
 
 			else if (mapdata.tile[y1][x1] == BLACK_FISH) {
 				mapdata.tile[y1][x1] = 0;
