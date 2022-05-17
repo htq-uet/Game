@@ -141,6 +141,9 @@ int main(int arcs, char* argv[]) {
 	
 
 	Menu menu;
+	
+	Tutorial _tutorial;
+	
 	bool quit = false;
 	int state=0;
 	enum STATE {
@@ -185,7 +188,7 @@ int main(int arcs, char* argv[]) {
 			}
 		}
 
-		else if (state==isToturial)
+		else if (state==isTutorial)
 		{
 			if (_tutorial.loadTutorial(gscreen)==QUIT){
                 quit = true;
