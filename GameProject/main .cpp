@@ -85,7 +85,7 @@ void close() {
 }
 
 int main(int arcs, char* argv[]) {
-	const int FPS = 36;
+	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;
 	Uint32 framestart;
 	int frametime;

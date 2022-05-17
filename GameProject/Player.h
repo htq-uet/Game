@@ -2,9 +2,9 @@
 #include "CommonFunction.h"
 #include "BaseObj.h"
 
-#define GRAVITY_SPEED 0.3
-#define MAX_FALL_SPEED 10
-#define PLAYER_SPEED 4
+#define GRAVITY_SPEED 0.2
+#define MAX_FALL_SPEED 4
+#define PLAYER_SPEED 2
 #define BLANK_TILE 0
 #define JUMP_VAL 8
 #define PINK_FISH 5

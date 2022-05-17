@@ -756,7 +756,7 @@ void Player::CheckToMus() {
 			if (checkCollision) {
 				ypos = y2;
 				ypos -= heightframe * 3 - 17;
-				yval = -5;
+				yval = -6;
 			}
 		}
 		else if (yval < 0) {
