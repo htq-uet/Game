@@ -1,14 +1,14 @@
+
 #pragma once
 
 #include "CommonFunction.h"
-#include "Player.h"
-#include "OtherObj.h"
+#include "fstream"
 
 class Save_game{
-    int lv=0;
+    int lv=1;
 public:
     void load_files ();
-    void clean_up();
+    void clean_up(int level);
     int getLV()
     {
         return lv;

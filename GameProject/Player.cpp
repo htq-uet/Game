@@ -1,3 +1,4 @@
+
 #include "Player.h"
 #include "OtherObj.h"
 Player::Player()
@@ -361,7 +362,7 @@ void Player::CheckToMap1(Map& mapdata) {
 			else if (mapdata.tile[y2][x2] == BLACK_LIQUID || mapdata.tile[y1][x2] == BLACK_LIQUID) gameoverState = 1;
 			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y1][x2] == POISON) gameoverState = 1;
 
-			else if (mapdata.tile[y1][x2] == BLACK_FISH || mapdata.tile[y2][x2] == BLACK_FISH) 
+			else if (mapdata.tile[y1][x2] == BLACK_FISH || mapdata.tile[y2][x2] == BLACK_FISH)
 			{ }
 			else if (mapdata.tile[y1][x2] == PINK_LIQUID || mapdata.tile[y2][x2] == PINK_LIQUID)
 			{ }
@@ -683,7 +684,7 @@ void Player::CheckToMap2(Map& mapdata) {
 
 void Player::CheckToMus() {
 	OtherObj mushroom;
-	mushroom.getPos(1400, 640);
+	mushroom.setPos(1380,640);
 
 	int x1 = 0;
 	int x2 = 0;
@@ -773,7 +774,7 @@ void Player::CheckToMus() {
 void Player::CheckToGate(int p)
 {
     OtherObj gatelv1;
-    gatelv1.getPos(480,550);
+    gatelv1.setPos(880,670);
 
 	int x1 = 0;
 	int x2 = 0;
@@ -841,3 +842,4 @@ void Player::CheckToGate(int p)
 		}
 	}
 }
+

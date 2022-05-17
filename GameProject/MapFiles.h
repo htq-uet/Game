@@ -1,3 +1,4 @@
+
 #pragma once
 #include <SDL.h>
 #include <iostream>
@@ -7,7 +8,6 @@ class MapFiles
 {
 public:
 	string mapfile;
-	//SDL_Rect p1pos, p2pos, muspos, gatepos;
 	MapFiles* nextlevel;
 
 

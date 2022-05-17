@@ -126,25 +126,25 @@ int main(int arcs, char* argv[]) {
 	player2.setPos(500, 662);
 
 	OtherObj cutemus;
-	cutemus.getPos(1380,640);
+	cutemus.setPos(1380,640);
     cutemus.LoadImg("assets/mushroom.png", gscreen, 48);
 	cutemus.getNum(4);
 	cutemus.setclip();
 
 	OtherObj gate;
-	gate.setPos(480,550);
+	gate.setPos(880,670);
 	gate.LoadImg("assets/gate.png",gscreen, 32);
 	gate.getNum(14);
 	gate.setclip();
 
 
 
-	
+
 
 	Menu menu;
-	
+
 	Tutorial _tutorial;
-	
+
 	bool quit = false;
 	int state=0;
 	enum STATE {
@@ -154,7 +154,7 @@ int main(int arcs, char* argv[]) {
 	};
 
 	int level = 1;
-	
+
 	if (menu.loadMenu(gscreen, mainfont) == 0) {
 		Mix_PlayMusic(background_music, -1);
 		state = isTutorial;
@@ -164,11 +164,10 @@ int main(int arcs, char* argv[]) {
 	}
 	if(menu.loadMenu(gscreen, mainfont) == 3)
     {
-
         KKgame.load_files();
-        cout<<KKgame.getLV();
-        level=KKgame.getLV();
-		if(level==1)
+        cout << KKgame.getLV();
+        level = KKgame.getLV();
+		if(level == 1)
 		{
 			string b = mllist->getHead()->mapfile;
 			const char* v = b.c_str();
@@ -176,8 +175,9 @@ int main(int arcs, char* argv[]) {
 			game_map.LoadTiles(gscreen);
 			state = isPlaying;
 		}
-		else if(level==2)
+		else if(level == 2)
 		{
+		    mllist->nextNode();
 			string b = mllist->getHead()->mapfile;
 			const char* v = b.c_str();
 			game_map.LoadMap(v);
@@ -192,9 +192,9 @@ int main(int arcs, char* argv[]) {
 	GameOver _gameover;
 	while (!quit) {
 		if (state==isGameover)
-		{	
+		{
 			cout << "GAMEOVER";
-			
+
 			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
 				SDL_RenderClear(gscreen);
 				string s = mllist->getHead()->mapfile;
@@ -232,7 +232,7 @@ int main(int arcs, char* argv[]) {
 		else if (state==isPlaying)
 		{
 			fps_timer.start();
-		
+
 			while (SDL_PollEvent(&event) != 0) {
 				if (event.type == SDL_QUIT) {
 					quit = true;
@@ -245,7 +245,6 @@ int main(int arcs, char* argv[]) {
 						break;
 					}
 				}
-				
 				player1.changeState();
 				player2.changeState();
 				player1.handleEvent1(event, gscreen, sound);
@@ -276,12 +275,13 @@ int main(int arcs, char* argv[]) {
 			if (player1.checkNextLevelP1() == true && player2.checkNextLevelP2() == true) {
 				cout << "NEXT!" << endl;
 				//mllist->nextNode();
+				level = 2;
 				string s = tmp->nextlevel->mapfile;
 				const char* v = s.c_str();
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);
 			}
-			if (player1.GameOver1()==1||player2.GameOver2()==1){                
+			if (player1.GameOver1()==1||player2.GameOver2()==1){
 				state = isGameover;
 
 			}
@@ -305,5 +305,6 @@ int main(int arcs, char* argv[]) {
 	}
 	close();
 	//menu_text.Free();
+	KKgame.clean_up(level);
 	return 0;
 }

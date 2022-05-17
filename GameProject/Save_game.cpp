@@ -1,5 +1,6 @@
+
 #include "Save_game.h"
-#include "Player.h"
+
 using namespace std;
 
 void Save_game::load_files ()
@@ -25,15 +26,15 @@ void Save_game::load_files ()
     }
 }
 
-void Save_game:: clean_up()
+void Save_game:: clean_up(int level)
 {
 
     //Open and clear data inside the file before writing new data
-     std::ofstream save;
+    std::ofstream save;
     save.open("map/game_save.txt", std::ofstream::out | std::ofstream::trunc);
 
     // Save the level
-    save << lv;
+    save << level;
     //Close the file
     save.close();
 
