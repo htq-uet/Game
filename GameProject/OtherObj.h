@@ -14,7 +14,7 @@ public:
 	void getFrame(int _f);
 	void setclip();
 	void set_renderquad();
-	void getPos(float x, float y);
+	void setPos(float x, float y);
 	int Get_ObjPosx();
 	int Get_ObjPosy();
 

@@ -10,6 +10,7 @@
 #include "MapFiles.h"
 #include "GameOver.h"
 #include "Tutorial.h"
+#include "Save_game.h"
 
 #include <iostream>
 #include <string>
@@ -17,6 +18,7 @@
 using namespace std;
 BaseObj background;
 TTF_Font *mainfont;
+Save_game KKgame;
 bool init() {
 	bool success = true;
 	int ret = SDL_Init(SDL_INIT_VIDEO);
@@ -107,7 +109,6 @@ int main(int arcs, char* argv[]) {
 	MapFiles* tmp = mllist->getHead();
 
 	GameMap game_map;
-	int k = 1;
 	string s = mllist->getHead()->mapfile;
 	const char* c = s.c_str();
 	game_map.LoadMap(c);
@@ -131,7 +132,7 @@ int main(int arcs, char* argv[]) {
 	cutemus.setclip();
 
 	OtherObj gate;
-	gate.getPos(480,550);
+	gate.setPos(480,550);
 	gate.LoadImg("assets/gate.png",gscreen, 32);
 	gate.getNum(14);
 	gate.setclip();
@@ -151,6 +152,8 @@ int main(int arcs, char* argv[]) {
 		isGameover = 2,
 		isTutorial = 3,
 	};
+
+	int level = 1;
 	
 	if (menu.loadMenu(gscreen, mainfont) == 0) {
 		Mix_PlayMusic(background_music, -1);
@@ -159,6 +162,33 @@ int main(int arcs, char* argv[]) {
 	if (menu.loadMenu(gscreen, mainfont) == QUIT) {
 		quit = true;
 	}
+	if(menu.loadMenu(gscreen, mainfont) == 3)
+    {
+
+        KKgame.load_files();
+        cout<<KKgame.getLV();
+        level=KKgame.getLV();
+		if(level==1)
+		{
+			string b = mllist->getHead()->mapfile;
+			const char* v = b.c_str();
+			game_map.LoadMap(v);
+			game_map.LoadTiles(gscreen);
+			state = isPlaying;
+		}
+		else if(level==2)
+		{
+			string b = mllist->getHead()->mapfile;
+			const char* v = b.c_str();
+			game_map.LoadMap(v);
+			game_map.LoadTiles(gscreen);
+			state = isPlaying;
+
+		}
+		else cout<<"None";
+
+    }
+
 	GameOver _gameover;
 	while (!quit) {
 		if (state==isGameover)
