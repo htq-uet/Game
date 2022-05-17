@@ -1,4 +1,4 @@
-#include "BaseObj.h"
+ #include "BaseObj.h"
 BaseObj::BaseObj() {
 	texture = NULL;
 	rect.x = 0;

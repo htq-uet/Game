@@ -125,7 +125,7 @@ int main(int arcs, char* argv[]) {
 	player2.setPos(500, 662);
 
 	OtherObj cutemus;
-	cutemus.getPos(1400,640);
+	cutemus.getPos(1380,640);
     cutemus.LoadImg("assets/mushroom.png", gscreen, 48);
 	cutemus.getNum(4);
 	cutemus.setclip();
