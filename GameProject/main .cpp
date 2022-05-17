@@ -9,6 +9,7 @@
 #include "OtherObj.h"
 #include "MapFiles.h"
 #include "GameOver.h"
+#include "Tutorial.h"
 
 #include <iostream>
 #include <string>
@@ -140,17 +141,20 @@ int main(int arcs, char* argv[]) {
 	
 
 	Menu menu;
+	
+	Tutorial _tutorial;
+	
 	bool quit = false;
 	int state=0;
 	enum STATE {
 		isPlaying = 1,
 		isGameover = 2,
-		isToturial = 3,
+		isTutorial = 3,
 	};
 	
 	if (menu.loadMenu(gscreen, mainfont) == 0) {
 		Mix_PlayMusic(background_music, -1);
-		state = isPlaying;
+		state = isTutorial;
 	}
 	if (menu.loadMenu(gscreen, mainfont) == QUIT) {
 		quit = true;
@@ -184,9 +188,15 @@ int main(int arcs, char* argv[]) {
 			}
 		}
 
-		else if (state==isToturial)
+		else if (state==isTutorial)
 		{
-
+			if (_tutorial.loadTutorial(gscreen)==QUIT){
+                quit = true;
+            }
+            else if (_tutorial.loadTutorial(gscreen)==SPACE){
+                quit = false;
+                state = isPlaying;
+            }
 		}
 
 		else if (state==isPlaying)
