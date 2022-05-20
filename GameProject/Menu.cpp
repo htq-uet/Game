@@ -1,4 +1,3 @@
-
 #include "Menu.h"
 #include "Text.h"
 #include <iostream>
@@ -7,7 +6,9 @@ Menu::Menu() {
 }
 Menu::~Menu() {
 	Free();
-}bool Menu::CheckFocusWithRect(const int& x, const int& y, const SDL_Rect& rect)
+}
+
+bool Menu::CheckFocusWithRect(const int& x, const int& y, const SDL_Rect& rect)
 {
 	if (x >= rect.x && x <= rect.x + rect.w &&
 		y >= rect.y && y <= rect.y + rect.h)
@@ -33,8 +34,6 @@ void ChangeColor(const int& index, const int& color, SDL_Renderer* renderer, TTF
 }
 
 int Menu::loadMenu(SDL_Renderer* renderer, TTF_Font* font) {
-
-
 
 	BuildItemMenu(0, "- Click here to play game -", 597, 800, Text::BLACK, renderer, font);
     BuildItemMenu(1, "Continue", 1200, 800, Text::BLACK, renderer, font);

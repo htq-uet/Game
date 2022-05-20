@@ -1,27 +1,25 @@
 #include "gamemap.h"
 
 GameMap::GameMap()
-{
-	
-}
+{}
 
 GameMap::~GameMap()
-{
+{}
 
-}
-
+//  Read map data from a file
 void GameMap::LoadMap(const char* name) {
 	FILE* fp=NULL;
 	fopen_s(&fp, name, "rb");
 	if (fp == NULL) {
 		return;
 	}
+
 	gamemap.maxx = 0;
 	gamemap.maxy = 0;
 	for (int i = 0;i < MAP_MAP_Y;i++) {
 		for (int j = 0;j < MAP_MAP_X;j++) {
-			fscanf_s(fp, "%d", &gamemap.tile[i][j]);
-	
+			fscanf(fp, "%d", &gamemap.tile[i][j]);
+
 			if (gamemap.tile[i][j] > 0) {
 				if (j > gamemap.maxx) {
 					gamemap.maxx = j;
@@ -42,13 +40,15 @@ void GameMap::LoadMap(const char* name) {
 	gamemap.mapfile = name;
 	fclose(fp);
 }
+
+//Load map assets
 void GameMap::LoadTiles(SDL_Renderer* screen) {
 	char file_img[60];
 	FILE* fp =NULL;
 
 	for (int i = 0;i < 20;i++) {
 		sprintf_s(file_img, "assets/block%d.png", i);
-		
+
 		fopen_s(&fp, file_img, "rb");
 		if (fp == NULL) {
 			continue;
@@ -58,6 +58,8 @@ void GameMap::LoadTiles(SDL_Renderer* screen) {
 		tilemap[i].LoadImg(file_img, screen);
 	}
 }
+
+//Fill assets in the right place.
 void  GameMap::DrawMap(SDL_Renderer* des) {
 	int x1 = 0;
 	int x2 = 0;
@@ -65,6 +67,7 @@ void  GameMap::DrawMap(SDL_Renderer* des) {
 	int y1 = 0;
 	int y2 = 0;
 
+	// tile index of the map
 	int mapx = 0;
 	int mapy = 0;
 

@@ -1,4 +1,4 @@
- #include "BaseObj.h"
+#include "BaseObj.h"
 BaseObj::BaseObj() {
 	texture = NULL;
 	rect.x = 0;
@@ -9,12 +9,18 @@ BaseObj::BaseObj() {
 BaseObj::~BaseObj() {
 	Free();
 }
+
+
+//Create a new texture from the loaded surface
 bool BaseObj::LoadImg(string path, SDL_Renderer* screen) {
 	Free();
+
 	SDL_Texture* ntexture = NULL;
+
 	SDL_Surface* loadimg = IMG_Load(path.c_str());
 	if (loadimg != NULL) {
 		SDL_SetColorKey(loadimg, SDL_TRUE, SDL_MapRGB(loadimg->format, 0, 255, 255));
+
 		ntexture = SDL_CreateTextureFromSurface(screen, loadimg);
 		if (ntexture != NULL) {
 			rect.w = loadimg->w;
@@ -26,10 +32,14 @@ bool BaseObj::LoadImg(string path, SDL_Renderer* screen) {
 
 	return texture != NULL;
 }
+
+//Render texture to screen
 void BaseObj::Render(SDL_Renderer* des, const SDL_Rect* clip) {
 	SDL_Rect renderquad = { rect.x,rect.y,rect.w,rect.h };
 	SDL_RenderCopy(des, texture, clip, &renderquad);
 }
+
+// Free Baseobj
 void BaseObj::Free() {
 	if (texture != NULL) {
 		SDL_DestroyTexture(texture);
@@ -38,17 +48,4 @@ void BaseObj::Free() {
 		rect.h = 0;
 	}
 }
-void BaseObj::setColor(const Uint8& red, const Uint8& green, const Uint8& blue)
-{
-	SDL_SetTextureColorMod(texture, red, green, blue);
-}
 
-void BaseObj::setBlendMode(const SDL_BlendMode& blending)
-{
-	SDL_SetTextureBlendMode(texture, blending);
-}
-
-void BaseObj::setAlpha(const Uint8& alpha)
-{
-	SDL_SetTextureAlphaMod(texture, alpha);
-}

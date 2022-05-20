@@ -1,6 +1,6 @@
-
 #include "Player.h"
 #include "OtherObj.h"
+
 Player::Player()
 {
 	frame = 0;
@@ -19,9 +19,12 @@ Player::Player()
 	input_type.jump = 0;
 	pinkfishcount = 0;
 }
+
 Player::~Player() {
 	Free();
 }
+
+//Load image at specified path
 bool Player::LoadImg(string path, SDL_Renderer* renderer) {
 	bool ktra = BaseObj::LoadImg(path, renderer);
 
@@ -32,6 +35,7 @@ bool Player::LoadImg(string path, SDL_Renderer* renderer) {
 	return ktra;
 }
 
+//Array of the player's state
 void Player::setclip() {
 	if (widthframe > 0 && heightframe > 0) {
 		FRAME_CLIP[0].x = 0;
@@ -72,6 +76,8 @@ void Player::setclip() {
 
 	}
 }
+
+//Show the player
 void Player::show1(SDL_Renderer* des) {
 	UpdateImgPlayer1(des);
 	if ((input_type.left == 1 || input_type.right == 1|| input_type.stayright == 1|| input_type.stayleft == 1)&&onground==true&&input_type.jump==0) {
@@ -106,13 +112,13 @@ void Player::show1(SDL_Renderer* des) {
 
 	SDL_RenderCopy(des, texture, currentclip, &renderQuad);
 }
+
 void Player::show2(SDL_Renderer* des) {
 	UpdateImgPlayer2(des);
 	if ((input_type.left == 1 || input_type.right == 1 || input_type.stayright == 1 || input_type.stayleft == 1) && onground == true && input_type.jump == 0) {
 		if (frame >= 0) {
 			++frame;
 		}
-
 	}
 	else {
 		frame = 0;
@@ -137,9 +143,10 @@ void Player::show2(SDL_Renderer* des) {
 		renderQuad.h = 3 * currentclip->h;
 	}
 
-
 	SDL_RenderCopy(des, texture, currentclip, &renderQuad);
 }
+
+//Receive keyboard input and manage the player's state
 void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]) {
 	if (e.type == SDL_KEYDOWN) {
 		switch (e.key.keysym.sym) {
@@ -210,6 +217,7 @@ void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 		}
 	}
 }
+
 void Player::handleEvent2(SDL_Event e, SDL_Renderer* renderer, Mix_Chunk* sound[5])
 {
 	if (e.type == SDL_KEYDOWN) {
@@ -279,6 +287,8 @@ void Player::handleEvent2(SDL_Event e, SDL_Renderer* renderer, Mix_Chunk* sound[
 		}
 	}
 }
+
+//Manage the player's movement
 void Player::DoPlayer1(Map& mapdata, int p) {
 	xval = 0;
 	yval += GRAVITY_SPEED;
@@ -302,9 +312,10 @@ void Player::DoPlayer1(Map& mapdata, int p) {
 	}
 
 	CheckToMap1(mapdata);
-	CheckToMus();
-	CheckToGate(p);
+
 }
+
+
 void Player::DoPlayer2(Map& mapdata, int p) {
 	xval = 0;
 	yval += GRAVITY_SPEED;
@@ -328,16 +339,16 @@ void Player::DoPlayer2(Map& mapdata, int p) {
 	}
 
 	CheckToMap2(mapdata);
-	CheckToMus();
-	CheckToGate(p);
+
 }
+
+//Check for player-map collisions
 void Player::CheckToMap1(Map& mapdata) {
 	int x1 = 0;
 	int x2 = 0;
 
 	int y1 = 0;
 	int y2 = 0;
-
 
 	//check horizontal
 	int height_min = (heightframe * 3 < TILE_SIZE ? heightframe * 3 : TILE_SIZE);
@@ -460,7 +471,6 @@ void Player::CheckToMap1(Map& mapdata) {
 		}
 	}
 
-
 	xpos += xval;
 	ypos += yval;
 	if (xpos < 0) {
@@ -473,63 +483,8 @@ void Player::CheckToMap1(Map& mapdata) {
 	if (ypos < 0) {
 		ypos = 0;
 	}
-
 }
 
-
-void Player::IncreasePowerPlayer1() {
-	pinkfishcount++;
-}
-void Player::UpdateImgPlayer1(SDL_Renderer* des) {
-	if (onground) {
-		if (input_type.left==1) {
-			LoadImg("assets/player1left.png", des);
-		}
-		else if (input_type.right==1) {
-			LoadImg("assets/player1.png", des);
-		}
-		else if (status == STAY_LEFT && input_type.jump == 0&&input_type.left==0&&input_type.right==0) {
-			LoadImg("assets/stayleft.png",des);
-		}
-		else if (status == STAY_RIGHT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
-			LoadImg("assets/stayright.png",des);
-		}
-
-	}
-	else {
-		if (input_type.left == 1) {
-		LoadImg("assets/jumpleft.png", des);
-		}
-		else if (input_type.right == 1) {
-		LoadImg("assets/jumpright.png", des);
-		}
-	}
-}
-void Player::UpdateImgPlayer2(SDL_Renderer* des) {
-	if (onground) {
-		if (input_type.left == 1) {
-			LoadImg("assets/player2left.png", des);
-		}
-		else if (input_type.right == 1) {
-			LoadImg("assets/player2.png", des);
-		}
-		else if (status == STAY_LEFT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
-			LoadImg("assets/player2stayleft.png", des);
-		}
-		else if (status == STAY_RIGHT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
-			LoadImg("assets/player2stayright.png", des);
-		}
-	}
-	else {
-		if (input_type.left == 1) {
-			LoadImg("assets/darkjumpleft.png", des);
-		}
-		else if (status == WALK_RIGHT) {
-			LoadImg("assets/darkjumpright.png", des);
-		}
-	}
-
-}
 void Player::CheckToMap2(Map& mapdata) {
 	int x1 = 0;
 	int x2 = 0;
@@ -681,10 +636,65 @@ void Player::CheckToMap2(Map& mapdata) {
 }
 
 
+void Player::IncreasePowerPlayer1() {
+	pinkfishcount++;
+}
 
-void Player::CheckToMus() {
-	OtherObj mushroom;
-	mushroom.setPos(1380,640);
+//Update the player's status
+void Player::UpdateImgPlayer1(SDL_Renderer* des) {
+	if (onground) {
+		if (input_type.left==1) {
+			LoadImg("assets/player1left.png", des);
+		}
+		else if (input_type.right==1) {
+			LoadImg("assets/player1.png", des);
+		}
+		else if (status == STAY_LEFT && input_type.jump == 0&&input_type.left==0&&input_type.right==0) {
+			LoadImg("assets/stayleft.png",des);
+		}
+		else if (status == STAY_RIGHT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
+			LoadImg("assets/stayright.png",des);
+		}
+
+	}
+	else {
+		if (input_type.left == 1) {
+		LoadImg("assets/jumpleft.png", des);
+		}
+		else if (input_type.right == 1) {
+		LoadImg("assets/jumpright.png", des);
+		}
+	}
+}
+
+void Player::UpdateImgPlayer2(SDL_Renderer* des) {
+	if (onground) {
+		if (input_type.left == 1) {
+			LoadImg("assets/player2left.png", des);
+		}
+		else if (input_type.right == 1) {
+			LoadImg("assets/player2.png", des);
+		}
+		else if (status == STAY_LEFT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
+			LoadImg("assets/player2stayleft.png", des);
+		}
+		else if (status == STAY_RIGHT && input_type.jump == 0 && input_type.left == 0 && input_type.right == 0) {
+			LoadImg("assets/player2stayright.png", des);
+		}
+	}
+	else {
+		if (input_type.left == 1) {
+			LoadImg("assets/darkjumpleft.png", des);
+		}
+		else if (status == WALK_RIGHT) {
+			LoadImg("assets/darkjumpright.png", des);
+		}
+	}
+
+}
+
+//Check for player-mushroom collisions
+void Player::CheckToMus(int p, OtherObj &mushroom) {
 
 	int x1 = 0;
 	int x2 = 0;
@@ -771,10 +781,10 @@ void Player::CheckToMus() {
 
 	}
 }
-void Player::CheckToGate(int p)
+
+//Check for player-gate collisions
+void Player::CheckToGate(int p, OtherObj &gate_)
 {
-    OtherObj gatelv1;
-    gatelv1.setPos(880,670);
 
 	int x1 = 0;
 	int x2 = 0;
@@ -783,10 +793,10 @@ void Player::CheckToGate(int p)
 	int y2 = 0;
 
     bool checkCollision = false;
-    int x1B = gatelv1.Get_ObjPosx();
-    int x2B = gatelv1.Get_ObjPosx() + 32*3;
-    int y1B = gatelv1.Get_ObjPosy();
-    int y2B = gatelv1.Get_ObjPosy() + 32*3;
+    int x1B = gate_.Get_ObjPosx();
+    int x2B = gate_.Get_ObjPosx() + 32*3;
+    int y1B = gate_.Get_ObjPosy();
+    int y2B = gate_.Get_ObjPosy() + 32*3;
     //check horizontal
 	int height_min = (heightframe * 3 < TILE_SIZE ? heightframe * 3 : TILE_SIZE);
 
@@ -801,14 +811,12 @@ void Player::CheckToGate(int p)
                 x1>=x1B&&y1>=y1B&&x1<=x2B&&y1<=y2B||
                 x2>=x1B&&y1>=y1B&&x2<=x2B&&y1<=y2B||
                 x1>=x1B&&y2>=y1B&&x1<=x2B&&y2<=y2B
-                ){
+                )
+                {
                     checkCollision=true;
                 }
-    //If none of the sides from A are outside B\
-    true;
 				if (checkCollision) {
 					nextLevelPlayer[p] = true;
-					cout << "nextlevel" << p + 1;
 				}
 				else nextLevelPlayer[p] = false;
 		}
@@ -821,7 +829,7 @@ void Player::CheckToGate(int p)
 	y2 = (ypos + yval + heightframe*3 -40) ;
 
 	if (x1/TILE_SIZE >= 0 && x2/TILE_SIZE < MAP_MAP_X && y1/TILE_SIZE >= 0 && y2/TILE_SIZE < MAP_MAP_Y) {
-            if(x2>=x1B&&y2>=y1B&&x2<=x2B&&y2<=y2B){
+                if(x2>=x1B&&y2>=y1B&&x2<=x2B&&y2<=y2B){
                     checkCollision=true;
                 }
                 else if(x1>=x1B&&y1>=y1B&&x1<=x2B&&y1<=y2B){
@@ -834,10 +842,10 @@ void Player::CheckToGate(int p)
                     checkCollision=true;
                 }
                 else checkCollision=false;
-        if(yval<0){
-        if (checkCollision) {
-				nextLevelPlayer[p] = true;
-				cout << "nextlevel"<<p+1;
+    if(yval<0){
+    if (checkCollision) {
+            nextLevelPlayer[p] = true;
+            cout<<"YES";
 			}
 		}
 	}

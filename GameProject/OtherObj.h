@@ -15,20 +15,18 @@ public:
 	void setclip();
 	void set_renderquad();
 	void setPos(float x, float y);
-	int Get_ObjPosx();
-	int Get_ObjPosy();
+	float Get_ObjPosx();
+	float Get_ObjPosy();
 
 private:
-	float xval;
-	float yval;
 	float xpos;
 	float ypos;
 	int widthframe;
 	int heightframe;
 	int n;
-	SDL_Rect FRAME_CLIP[14];
+	SDL_Rect FRAME_CLIP[15];
 	int frame;
-	
+
 	int frameSize;
 
 };

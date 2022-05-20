@@ -2,25 +2,28 @@
 
 OtherObj::OtherObj() {
     frame = 0;
-	xval = 0;
-	yval = 0;
 	widthframe = 0;
 	heightframe = 0;
 }
+
 OtherObj::~OtherObj() {
 	Free();
 }
 
-void OtherObj:: getPos(float x, float y)
+//set the object's position value
+void OtherObj::setPos(float x, float y)
 {
     xpos = x;
     ypos = y;
 }
 
+//get frame's size
 void OtherObj::getFrame(int _f)
 {
     frameSize = _f;
 }
+
+//Load image at specified path
 bool OtherObj::LoadImg(string path, SDL_Renderer* renderer, int frameSize) {
 	bool check = BaseObj::LoadImg(path, renderer);
 
@@ -31,10 +34,13 @@ bool OtherObj::LoadImg(string path, SDL_Renderer* renderer, int frameSize) {
 	return check;
 }
 
+
+//get number of frames showing the character's state
 void OtherObj::getNum(int _n){
 	n=_n;
 }
 
+//Set clip of an object's state
 void OtherObj::setclip() {
 	if (widthframe > 0 && heightframe > 0) {
 		for(int i=0;i<n;i++){
@@ -46,16 +52,18 @@ void OtherObj::setclip() {
 	}
 }
 
-int OtherObj::Get_ObjPosx()
+//Get an object's starting position
+float OtherObj::Get_ObjPosx()
 {
- return xpos;
+    return xpos;
 }
 
-int OtherObj::Get_ObjPosy()
+float OtherObj::Get_ObjPosy()
 {
     return ypos;
 }
 
+//Show the object
 void OtherObj::show(SDL_Renderer* des) {
 if (frame >= 0) {
 			++frame;
@@ -80,9 +88,9 @@ if (frame >= 0) {
 		renderQuad.h = 3*currentclip->h;
 	}
 
-
 	SDL_RenderCopy(des, texture, currentclip, &renderQuad);
 }
+
 
 
 

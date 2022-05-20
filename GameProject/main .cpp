@@ -71,6 +71,7 @@ void close() {
 	background.Free();
 	SDL_DestroyRenderer(gscreen);
 	gscreen = NULL;
+
 	TTF_CloseFont(mainfont);
 	mainfont = NULL;
 	SDL_DestroyWindow(gwindow);
@@ -126,20 +127,17 @@ int main(int arcs, char* argv[]) {
 	player2.setPos(500, 662);
 
 	OtherObj cutemus;
-	cutemus.setPos(1380,640);
+	cutemus.setPos(1400,640);
     cutemus.LoadImg("assets/mushroom.png", gscreen, 48);
 	cutemus.getNum(4);
 	cutemus.setclip();
 
 	OtherObj gate;
-	gate.setPos(880,670);
+	gate.setPos(225,195);
+	//gate.setPos(600,662);
 	gate.LoadImg("assets/gate.png",gscreen, 32);
 	gate.getNum(14);
 	gate.setclip();
-
-
-
-
 
 	Menu menu;
 
@@ -185,7 +183,6 @@ int main(int arcs, char* argv[]) {
 			state = isPlaying;
 
 		}
-		else cout<<"None";
 
     }
 
@@ -193,7 +190,6 @@ int main(int arcs, char* argv[]) {
 	while (!quit) {
 		if (state==isGameover)
 		{
-			cout << "GAMEOVER";
 
 			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
 				SDL_RenderClear(gscreen);
@@ -257,42 +253,40 @@ int main(int arcs, char* argv[]) {
 
 			Map map_data = game_map.getMap();
 
+            cutemus.show(gscreen);
 
+			gate.show(gscreen);
 			player1.DoPlayer1(map_data, 0);
+            player1.CheckToGate(0,gate);
+            player1.CheckToMus(0, cutemus);
 			player1.show1(gscreen);
 
 			player2.DoPlayer2(map_data, 1);
+            player2.CheckToGate(1,gate);
+            player2.CheckToMus(1, cutemus);
 			player2.show2(gscreen);
 
 
-			cutemus.show(gscreen);
-
-			gate.show(gscreen);
-
 			game_map.SetMap(map_data);
 			game_map.DrawMap(gscreen);
-
 			if (player1.checkNextLevelP1() == true && player2.checkNextLevelP2() == true) {
-				cout << "NEXT!" << endl;
-				//mllist->nextNode();
-				level = 2;
+
+				level += 1;
 				string s = tmp->nextlevel->mapfile;
 				const char* v = s.c_str();
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);
+				player1.setPos(332, 662);
+				player2.setPos(332, 662);
+				cutemus.setPos(662, 500);
+				gate.setPos(900, 662);
 			}
 			if (player1.GameOver1()==1||player2.GameOver2()==1){
 				state = isGameover;
-
 			}
 
 			int real_time = fps_timer.get_tick();
 			int time_per_frame = 1000 / FPS;
-
-
-
-			//menu_text.RenderText(gscreen, 800, 15);
-
 
 			SDL_RenderPresent(gscreen);
 			if (real_time < time_per_frame) {
@@ -304,7 +298,6 @@ int main(int arcs, char* argv[]) {
 		}
 	}
 	close();
-	//menu_text.Free();
-	KKgame.clean_up(level);
+	KKgame.game_save(level);
 	return 0;
 }
