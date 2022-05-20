@@ -1,6 +1,8 @@
+
 #pragma once
 #include "CommonFunction.h"
 #include "BaseObj.h"
+#include "OtherObj.h"
 
 #define GRAVITY_SPEED 0.2
 #define MAX_FALL_SPEED 4
@@ -41,9 +43,9 @@ public:
 	void CheckToMap1(Map& mapdata);
 	void CheckToMap2(Map& mapdata);
 
-	void CheckToMus();
+	void CheckToMus(int p, OtherObj &mushroom);
 
-	void CheckToGate(int p);
+	void CheckToGate(int p,OtherObj &gate_);
 
 	void UpdateImgPlayer1(SDL_Renderer* des);
 	void UpdateImgPlayer2(SDL_Renderer* des);
@@ -79,7 +81,6 @@ private:
 
 	float xval;
 	float yval;
-
 	float xpos;
 	float ypos;
 
