@@ -316,7 +316,8 @@ int main(int arcs, char* argv[]) {
 			if (player1.checkNextLevelP1() == true && player2.checkNextLevelP2() == true) {
 
 				if(level<2) level += 1;
-                else if(level==2)
+				if (level > 2) state = isWin;
+                if(level==2)
                 {
                 player1.setPos(275, 662);
 				player2.setPos(275, 580);
@@ -328,7 +329,7 @@ int main(int arcs, char* argv[]) {
 				const char* v = s.c_str();
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);
-				else if (level > 2) state = isWin;
+				
 
 			}
 			if (player1.GameOver1() == 1||player2.GameOver2() == 1){
