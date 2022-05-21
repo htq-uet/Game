@@ -17,7 +17,14 @@ Player::Player()
 	input_type.stayleft = 0;
 	input_type.stayright = 0;
 	input_type.jump = 0;
-	pinkfishcount = 0;
+	
+	pinkfish1 = 0;
+	blackfish1=0;
+	pinkliquid1=0;
+
+	pinkfish2 = 0;
+	blackfish2=0;
+	blackliquid2=0;
 }
 
 Player::~Player() {
@@ -147,10 +154,13 @@ void Player::show2(SDL_Renderer* des) {
 }
 
 //Receive keyboard input and manage the player's state
-void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]) {
+
+
+void Player::handleEvent1(SDL_Event e, SDL_Renderer* renderer, Mix_Chunk* sound[5])
+{
 	if (e.type == SDL_KEYDOWN) {
 		switch (e.key.keysym.sym) {
-		case SDLK_d:
+		case SDLK_RIGHT:
 			status = WALK_RIGHT;
 			input_type.stayleft = 0;
 			input_type.stayright = 0;
@@ -160,7 +170,7 @@ void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			UpdateImgPlayer1(renderer);
 			break;
 
-		case SDLK_a:
+		case SDLK_LEFT:
 			status = WALK_LEFT;
 			input_type.stayleft = 0;
 			input_type.stayright = 0;
@@ -168,6 +178,75 @@ void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			input_type.right = 0;
 
 			UpdateImgPlayer1(renderer);
+
+			break;
+		case SDLK_UP:
+			if (onground) {
+				Mix_PlayChannel(-1, sound[0], 0);
+				input_type.jump = 1;
+				input_type.stayleft = 0;
+				input_type.stayright = 0;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else if (e.type == SDL_KEYUP) {
+		switch (e.key.keysym.sym) {
+		case SDLK_RIGHT:
+			status = STAY_RIGHT;
+			if (onground == true) {
+				input_type.stayright = 1;
+				input_type.right = 0;
+				input_type.stayleft = 0;
+			}
+			input_type.right = 0;
+			input_type.stayleft = 0;
+
+			UpdateImgPlayer1(renderer);
+
+			break;
+		case SDLK_LEFT:
+			status = STAY_LEFT;
+			if (onground == true) {
+				input_type.stayleft = 1;
+				input_type.left = 0;
+				input_type.stayright = 0;
+			}
+			input_type.left = 0;
+			input_type.stayright = 0;
+
+			UpdateImgPlayer1(renderer);
+
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void Player::handleEvent2(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]) {
+	if (e.type == SDL_KEYDOWN) {
+		switch (e.key.keysym.sym) {
+		case SDLK_d:
+			status = WALK_RIGHT;
+			input_type.stayleft = 0;
+			input_type.stayright = 0;
+			input_type.right = 1;
+			input_type.left = 0;
+
+			UpdateImgPlayer2(renderer);
+			break;
+
+		case SDLK_a:
+			status = WALK_LEFT;
+			input_type.stayleft = 0;
+			input_type.stayright = 0;
+			input_type.left = 1;
+			input_type.right = 0;
+
+			UpdateImgPlayer2(renderer);
 
 			break;
 		case SDLK_w:
@@ -196,7 +275,7 @@ void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			input_type.right = 0;
 			input_type.stayleft = 0;
 
-			UpdateImgPlayer1(renderer);
+			UpdateImgPlayer2(renderer);
 
 			break;
 		case SDLK_a:
@@ -209,76 +288,6 @@ void Player::handleEvent1(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			input_type.left = 0;
 			input_type.stayright = 0;
 
-			UpdateImgPlayer1(renderer);
-
-			break;
-		default:
-			break;
-		}
-	}
-}
-
-void Player::handleEvent2(SDL_Event e, SDL_Renderer* renderer, Mix_Chunk* sound[5])
-{
-	if (e.type == SDL_KEYDOWN) {
-		switch (e.key.keysym.sym) {
-		case SDLK_RIGHT:
-			status = WALK_RIGHT;
-			input_type.stayleft = 0;
-			input_type.stayright = 0;
-			input_type.right = 1;
-			input_type.left = 0;
-
-			UpdateImgPlayer2(renderer);
-			break;
-
-		case SDLK_LEFT:
-			status = WALK_LEFT;
-			input_type.stayleft = 0;
-			input_type.stayright = 0;
-			input_type.left = 1;
-			input_type.right = 0;
-
-			UpdateImgPlayer2(renderer);
-
-			break;
-		case SDLK_UP:
-			if (onground) {
-				Mix_PlayChannel(-1, sound[0], 0);
-				input_type.jump = 1;
-				input_type.stayleft = 0;
-				input_type.stayright = 0;
-			}
-			break;
-		default:
-			break;
-		}
-	}
-	else if (e.type == SDL_KEYUP) {
-		switch (e.key.keysym.sym) {
-		case SDLK_RIGHT:
-			status = STAY_RIGHT;
-			if (onground == true) {
-				input_type.stayright = 1;
-				input_type.right = 0;
-				input_type.stayleft = 0;
-			}
-			input_type.right = 0;
-			input_type.stayleft = 0;
-
-			UpdateImgPlayer2(renderer);
-
-			break;
-		case SDLK_LEFT:
-			status = STAY_LEFT;
-			if (onground == true) {
-				input_type.stayleft = 1;
-				input_type.left = 0;
-				input_type.stayright = 0;
-			}
-			input_type.left = 0;
-			input_type.stayright = 0;
-
 			UpdateImgPlayer2(renderer);
 
 			break;
@@ -287,7 +296,6 @@ void Player::handleEvent2(SDL_Event e, SDL_Renderer* renderer, Mix_Chunk* sound[
 		}
 	}
 }
-
 //Manage the player's movement
 void Player::DoPlayer1(Map& mapdata, int p) {
 	xval = 0;
@@ -360,23 +368,32 @@ void Player::CheckToMap1(Map& mapdata) {
 	y2 = (ypos + height_min +20) / TILE_SIZE;
 
 	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
-		if (xval > 0) {
+		if (xval > 0) // player moves to the right
+		{
 
 			if (mapdata.tile[y1][x2] == PINK_FISH) {
 				mapdata.tile[y1][x2] = 0;
-				IncreasePowerPlayer1();
+				PinkFish_Player1();
 			}
 			if (mapdata.tile[y2][x2] == PINK_FISH) {
 				mapdata.tile[y2][x2] = 0;
-				IncreasePowerPlayer1();
+				PinkFish_Player1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID || mapdata.tile[y1][x2] == BLACK_LIQUID) gameoverState = 1;
-			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y1][x2] == POISON) gameoverState = 1;
+			if (mapdata.tile[y1][x2] == BLACK_FISH) {
+				mapdata.tile[y1][x2] = 0;
+				BlackFish_Player1();
+			}
+			if (mapdata.tile[y2][x2] == BLACK_FISH) {
+				mapdata.tile[y2][x2] = 0;
+				BlackFish_Player1();
+			}
 
-			else if (mapdata.tile[y1][x2] == BLACK_FISH || mapdata.tile[y2][x2] == BLACK_FISH)
-			{ }
-			else if (mapdata.tile[y1][x2] == PINK_LIQUID || mapdata.tile[y2][x2] == PINK_LIQUID)
-			{ }
+			else if (mapdata.tile[y2][x2] == BLACK_LIQUID || mapdata.tile[y2][x1] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y2][x1] == POISON) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == PINK_LIQUID || mapdata.tile[y2][x1] == PINK_LIQUID)
+			{
+				PinkLiquid_Player1();
+			}
 			else {
 				if ((mapdata.tile[y1][x2] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE)) {
 					xpos = (x2)*TILE_SIZE;
@@ -385,23 +402,33 @@ void Player::CheckToMap1(Map& mapdata) {
 				}
 			}
 		}
-		else if (xval < 0) {
+		else if (xval < 0) //player move to the left
+		{
 
 			if (mapdata.tile[y2][x1] == PINK_FISH ) {
 				mapdata.tile[y2][x1] = 0;
-				IncreasePowerPlayer1();
+				PinkFish_Player1();
 			}
-			else if (mapdata.tile[y2][x2] == BLACK_LIQUID || mapdata.tile[y2][x1] == BLACK_LIQUID) gameoverState = 1;
-			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y2][x1] == POISON) gameoverState = 1;
-
 			else if (mapdata.tile[y1][x1]==PINK_FISH) {
 				mapdata.tile[y1][x1] = 0;
-				IncreasePowerPlayer1();
+				PinkFish_Player1();
 			}
-			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y2][x1] == BLACK_FISH)
-			{}
-			else if (mapdata.tile[y1][x1] == PINK_LIQUID || mapdata.tile[y2][x1] == PINK_LIQUID)
-			{}
+			else if (mapdata.tile[y1][x1] == BLACK_FISH  )
+			{
+                mapdata.tile[y1][x1] = 0;
+                BlackFish_Player1();
+			}
+			else if (mapdata.tile[y2][x1] == BLACK_FISH)
+            {
+                mapdata.tile[y2][x1]=0;
+                BlackFish_Player1();
+            }
+			else if (mapdata.tile[y2][x2] == BLACK_LIQUID || mapdata.tile[y2][x1] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y2][x1] == POISON) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == PINK_LIQUID || mapdata.tile[y2][x1] == PINK_LIQUID)
+			{
+				PinkLiquid_Player1();
+			}
 			else {
 				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y2][x1] != BLANK_TILE) {
 					xpos = (x1)*TILE_SIZE + 20;
@@ -410,6 +437,7 @@ void Player::CheckToMap1(Map& mapdata) {
 			}
 		}
 	}
+	
 	//check vertical
 	int width_min = widthframe*3< TILE_SIZE ? widthframe*3 : TILE_SIZE;
 	x1 = (xpos+25) / TILE_SIZE;
@@ -419,21 +447,32 @@ void Player::CheckToMap1(Map& mapdata) {
 	y2 = (ypos + yval + heightframe*3 -17) / TILE_SIZE;
 
 	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
-		if (yval > 0) {
+		if (yval > 0) //check movement by gravity force
+		{
 			if (mapdata.tile[y2][x2] == PINK_FISH) {
 				mapdata.tile[y2][x2] = 0;
-				IncreasePowerPlayer1();
+				PinkFish_Player1();
 			}
-			else if (mapdata.tile[y2][x1] == BLACK_LIQUID || mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
-
 			else if (mapdata.tile[y2][x1] == PINK_FISH) {
 				mapdata.tile[y2][x1] = 0;
-				IncreasePowerPlayer1();
+				PinkFish_Player1();
 			}
-			else if (mapdata.tile[y2][x1] == BLACK_FISH || mapdata.tile[y2][x2] == BLACK_FISH)
-			{}
+			else if (mapdata.tile[y2][x1] == BLACK_FISH)
+			{
+                mapdata.tile[y2][x1] = 0;
+                BlackFish_Player1();
+			}
+			else if (mapdata.tile[y2][x2] == BLACK_FISH)
+            {
+                mapdata.tile[y2][x2] = 0;
+                BlackFish_Player1();
+            }
+			else if (mapdata.tile[y2][x1] == BLACK_LIQUID || mapdata.tile[y2][x2] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x1] == POISON || mapdata.tile[y2][x2] == POISON) gameoverState = 1;
 			else if (mapdata.tile[y2][x1] == PINK_LIQUID || mapdata.tile[y2][x2] == PINK_LIQUID)
-			{}
+			{
+				PinkLiquid_Player1();
+			}
 			else {
 				if (mapdata.tile[y2][x1] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE) {
 					ypos = y2 * TILE_SIZE;
@@ -443,22 +482,30 @@ void Player::CheckToMap1(Map& mapdata) {
 				}
 			}
 		}
-		else if (yval < 0) {
+		else if (yval < 0) //PLAYER JUMPS
+		{
 
 			if (mapdata.tile[y1][x2] == PINK_FISH) {
 				mapdata.tile[y1][x2] = 0;
-				IncreasePowerPlayer1();
+				PinkFish_Player1();
 			}
-			else if (mapdata.tile[y1][x2] == BLACK_LIQUID&& mapdata.tile[y1][x1] == BLACK_LIQUID) gameoverState = 1;
-			else if (mapdata.tile[y1][x2] == POISON && mapdata.tile[y1][x1] == POISON) gameoverState = 1;
-
 			else if (mapdata.tile[y1][x1] == PINK_FISH) {
 				mapdata.tile[y1][x1] = 0;
-				IncreasePowerPlayer1();
+				PinkFish_Player1();
 			}
-			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
+			else if (mapdata.tile[y1][x1] == BLACK_FISH)
 			{
+			    mapdata.tile[y1][x1] = 0;
+			    BlackFish_Player1();
 			}
+			else if (mapdata.tile[y1][x2] == BLACK_FISH)
+            {
+                mapdata.tile[y1][x2] = 0;
+                BlackFish_Player1();
+            }
+			else if (mapdata.tile[y1][x2] == BLACK_LIQUID&& mapdata.tile[y1][x1] == BLACK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y1][x2] == POISON && mapdata.tile[y1][x1] == POISON) gameoverState = 1;
+			
 			else if (mapdata.tile[y1][x1] == PINK_LIQUID || mapdata.tile[y1][x2] == PINK_LIQUID)
 			{
 			}
@@ -485,6 +532,18 @@ void Player::CheckToMap1(Map& mapdata) {
 	}
 }
 
+//Score calculations
+void Player::PinkFish_Player1() {
+	pinkfish1 +=20;
+}
+void Player::BlackFish_Player1(){
+    blackfish1 -= 4;
+}
+void Player::PinkLiquid_Player1()
+{
+    pinkliquid1 +=1;
+}
+
 void Player::CheckToMap2(Map& mapdata) {
 	int x1 = 0;
 	int x2 = 0;
@@ -503,22 +562,32 @@ void Player::CheckToMap2(Map& mapdata) {
 	y2 = (ypos + height_min + 20) / TILE_SIZE;
 
 	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
-		if (xval > 0) {
+		if (xval > 0) //player moves to the right
+		{
 
 			if (mapdata.tile[y1][x2] == BLACK_FISH) {
 				mapdata.tile[y1][x2] = 0;
-				IncreasePowerPlayer1();
+				BlackFish_Player2();
 			}
-			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameoverState = 1;
-			else if (mapdata.tile[y2][x2] == PINK_FISH) {
+			else if (mapdata.tile[y2][x2] == BLACK_FISH) {
 				mapdata.tile[y2][x2] = 0;
-				IncreasePowerPlayer1();
+				BlackFish_Player2();
 			}
-			else if (mapdata.tile[y1][x2] == PINK_FISH || mapdata.tile[y2][x2] == PINK_FISH)
+			else if (mapdata.tile[y1][x2] == PINK_FISH )
 			{
+			    mapdata.tile[y1][x2] = 0;
+			    PinkFish_Player2();
 			}
+			else if (mapdata.tile[y2][x2] == PINK_FISH)
+            {
+                mapdata.tile[y2][x2] = 0;
+			    PinkFish_Player2();
+            }
+			else if (mapdata.tile[y2][x2] == PINK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == POISON) gameoverState = 1;
 			else if (mapdata.tile[y1][x2] == BLACK_LIQUID || mapdata.tile[y2][x2] == BLACK_LIQUID)
 			{
+			    BlackLiquid_Player2();
 			}
 			else {
 				if ((mapdata.tile[y1][x2] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE)) {
@@ -528,27 +597,36 @@ void Player::CheckToMap2(Map& mapdata) {
 				}
 			}
 		}
-		else if (xval < 0) {
+		else if (xval < 0) //player moves to the left
+		{
 
 			if (mapdata.tile[y2][x1] == BLACK_FISH) {
 				mapdata.tile[y2][x1] = 0;
-				IncreasePowerPlayer1();
+				BlackFish_Player2();
 			}
-			else if (mapdata.tile[y2][x1] == PINK_LIQUID || mapdata.tile[y1][x1] == PINK_LIQUID) gameoverState = 1;
-
 			else if (mapdata.tile[y1][x1] == BLACK_FISH) {
 				mapdata.tile[y1][x1] = 0;
-				IncreasePowerPlayer1();
+				BlackFish_Player2();
 			}
-			else if (mapdata.tile[y1][x1] == PINK_FISH || mapdata.tile[y2][x1] == PINK_FISH)
+
+			else if (mapdata.tile[y1][x1] == PINK_FISH )
 			{
+			    mapdata.tile[y1][x1] = 0;
+				PinkFish_Player2();
 			}
-			else if (mapdata.tile[y1][x1] == BLACK_LIQUID || mapdata.tile[y2][x1] == BLACK_LIQUID)
+			else if (mapdata.tile[y2][x1] == PINK_FISH)
+            {
+                mapdata.tile[2][x1] = 0;
+				PinkFish_Player2();
+            }
+			else if (mapdata.tile[y2][x1] == PINK_LIQUID ) gameoverState = 1;
+			else if (mapdata.tile[y2][x1] == POISON ) gameoverState = 1;
+			else if (mapdata.tile[y2][x1] == BLACK_LIQUID )
 			{
+				BlackLiquid_Player2();
 			}
 			else {
-				if (mapdata.tile[y1][x1] != BLANK_TILE ||
-					mapdata.tile[y2][x1] != BLANK_TILE) {
+				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y2][x1] != BLANK_TILE) {
 					xpos = (x1)*TILE_SIZE + 20;
 					xval = 0;
 				}
@@ -564,23 +642,29 @@ void Player::CheckToMap2(Map& mapdata) {
 	y2 = (ypos + yval + heightframe * 3 - 17) / TILE_SIZE;
 
 	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
-		if (yval > 0) {
+		if (yval > 0) //check movement by gravity force
+		{
 			if (mapdata.tile[y2][x2] == BLACK_FISH) {
 				mapdata.tile[y2][x2] = 0;
-				IncreasePowerPlayer1();
+				BlackFish_Player2();
 			}
-			else if (mapdata.tile[y2][x2] == PINK_LIQUID || mapdata.tile[y2][x1] ==PINK_LIQUID) gameoverState = 1;
-			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y2][x1] == POISON) gameoverState = 1;
-
 			else if (mapdata.tile[y2][x1] == BLACK_FISH) {
 				mapdata.tile[y2][x1] = 0;
-				IncreasePowerPlayer1();
+				BlackFish_Player2();
 			}
-			else if (mapdata.tile[y2][x1] == PINK_FISH || mapdata.tile[y2][x2] == PINK_FISH)
-			{
+			if (mapdata.tile[y2][x2] == BLACK_FISH) {
+				mapdata.tile[y2][x2] = 0;
+				BlackFish_Player2();
 			}
-			else if (mapdata.tile[y2][x1] == BLACK_LIQUID || mapdata.tile[y2][x2] == BLACK_LIQUID)
+			else if (mapdata.tile[y2][x1] == BLACK_FISH) {
+				mapdata.tile[y2][x1] = 0;
+				BlackFish_Player2();
+			}
+			else if (mapdata.tile[y2][x2] == PINK_LIQUID || mapdata.tile[y2][x1] == PINK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y2][x1] == POISON) gameoverState = 1;
+			else if (mapdata.tile[y2][x2] == BLACK_LIQUID || mapdata.tile[y2][x1] == BLACK_LIQUID)
 			{
+				BlackLiquid_Player2();
 			}
 			else {
 				if (mapdata.tile[y2][x1] != BLANK_TILE || mapdata.tile[y2][x2] != BLANK_TILE) {
@@ -591,24 +675,32 @@ void Player::CheckToMap2(Map& mapdata) {
 				}
 			}
 		}
-		else if (yval < 0) {
+		else if (yval < 0) //player jumps
+		{
 
 			if (mapdata.tile[y1][x2] == BLACK_FISH) {
 				mapdata.tile[y1][x2] = 0;
-				IncreasePowerPlayer1();
+				BlackFish_Player2();
 			}
-			else if (mapdata.tile[y1][x1] == PINK_LIQUID || mapdata.tile[y1][x2] == PINK_LIQUID) gameoverState = 1;
-			else if (mapdata.tile[y1][x1] == POISON || mapdata.tile[y1][x2] == POISON) gameoverState = 1;
-
 			else if (mapdata.tile[y1][x1] == BLACK_FISH) {
 				mapdata.tile[y1][x1] = 0;
-				IncreasePowerPlayer1();
+				BlackFish_Player2();
 			}
-			else if (mapdata.tile[y1][x1] == PINK_FISH || mapdata.tile[y1][x2] == PINK_FISH)
+			else if (mapdata.tile[y1][x1] == PINK_FISH )
 			{
+			    mapdata.tile[y1][x1] = 0;
+			    PinkFish_Player2();
 			}
+			else if (mapdata.tile[y1][x2] == PINK_FISH)
+            {
+                mapdata.tile[y1][x2] = 0;
+                PinkFish_Player2();
+            }
+			else if (mapdata.tile[y1][x1] == PINK_LIQUID || mapdata.tile[y1][x2] == PINK_LIQUID) gameoverState = 1;
+			else if (mapdata.tile[y1][x1] == POISON || mapdata.tile[y1][x2] == POISON) gameoverState = 1;
 			else if (mapdata.tile[y1][x1] == BLACK_LIQUID || mapdata.tile[y1][x2] == BLACK_LIQUID)
 			{
+				BlackLiquid_Player2();
 			}
 			else {
 				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y1][x2] != BLANK_TILE) {
@@ -635,10 +727,18 @@ void Player::CheckToMap2(Map& mapdata) {
 
 }
 
-
-void Player::IncreasePowerPlayer1() {
-	pinkfishcount++;
+//Score calculations
+void Player::PinkFish_Player2() {
+	pinkfish2 -=4;
 }
+void Player::BlackFish_Player2(){
+    blackfish2 +=20 ;
+}
+void Player::BlackLiquid_Player2()
+{
+    blackliquid2 +=1;
+}
+
 
 //Update the player's status
 void Player::UpdateImgPlayer1(SDL_Renderer* des) {

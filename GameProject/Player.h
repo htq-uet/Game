@@ -10,8 +10,8 @@
 #define BLANK_TILE 0
 #define JUMP_VAL 8
 #define PINK_FISH 5
-#define POISON 4
 #define BLACK_FISH 6
+#define POISON 4
 #define PINK_LIQUID 7
 #define BLACK_LIQUID 8
 
@@ -50,7 +50,29 @@ public:
 	void UpdateImgPlayer1(SDL_Renderer* des);
 	void UpdateImgPlayer2(SDL_Renderer* des);
 
-	void IncreasePowerPlayer1();
+	
+	void PinkFish_Player1();
+	void BlackFish_Player1();
+	void PinkLiquid_Player1();
+    int getScore1()
+	{
+	    int score;
+	    score = pinkfish1 + blackfish1 + pinkliquid1;
+	    return score;
+	}
+	
+	
+	void PinkFish_Player2();
+	void BlackFish_Player2();
+	void BlackLiquid_Player2();
+    int getScore2()
+	{
+	    int score;
+	    score = pinkfish2 + blackfish2 + blackliquid2;
+	    return score;
+	}
+	
+	
 	void setPos(float x,float y)
 	{
 		xpos = x;
@@ -68,6 +90,7 @@ public:
 	}
 	int GameOver1() { return gameoverState; }
 	int GameOver2() { return gameoverState; }
+	
 	void changeState() {
 		if (gameoverState == 1)
 		{
@@ -77,7 +100,14 @@ public:
 
 private:
 
-	int pinkfishcount;
+	int pinkfish1;
+	int blackfish1;
+	int pinkliquid1;
+
+
+	int pinkfish2;
+	int blackfish2;
+	int blackliquid2;
 
 	float xval;
 	float yval;

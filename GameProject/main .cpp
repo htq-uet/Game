@@ -9,7 +9,6 @@
 #include "OtherObj.h"
 #include "MapFiles.h"
 #include "GameOver.h"
-#include "Tutorial.h"
 #include "Save_game.h"
 
 #include <iostream>
@@ -19,6 +18,7 @@ using namespace std;
 BaseObj background;
 TTF_Font *mainfont;
 Save_game KKgame;
+
 bool init() {
 	bool success = true;
 	int ret = SDL_Init(SDL_INIT_VIDEO);
@@ -52,10 +52,14 @@ bool init() {
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) <0) {
 		success = false;
 	}
-	background_music = Mix_LoadMUS("sounds/background.wav");
+	background_music = Mix_LoadMUS("sounds/mainbackground.wav");
+	menu_music = Mix_LoadMUS("sounds/menu.wav");
+	gameover_music = Mix_LoadMUS("sounds/gameover.wav");
+	winner_music = Mix_LoadMUS("sounds/win.wav");
+	
 	sound[0] = Mix_LoadWAV("sounds/jump.wav");
 
-	if (background_music==NULL||sound[0] == NULL) {
+	if (background_music==NULL||sound[0] == NULL|| menu_music == NULL || gameover_music == NULL||winner_music == NULL) {
 		cerr << "Sound Error!\n" << Mix_GetError();
 		success = false;
 	}
@@ -78,6 +82,12 @@ void close() {
 	gwindow = NULL;
 	Mix_FreeMusic(background_music);
 	background_music = NULL;
+	Mix_FreeMusic(menu_music);
+	menu_music = NULL;
+	Mix_FreeMusic(gameover_music);
+	gameover_music = NULL;
+	Mix_FreeMusic(winner_music);
+	winner_music = NULL;
 	Mix_FreeChunk(sound[0]);
 	sound[0] = NULL;
 	Mix_CloseAudio();
@@ -137,23 +147,34 @@ int main(int arcs, char* argv[]) {
 	gate.LoadImg("assets/gate.png",gscreen, 32);
 	gate.getNum(14);
 	gate.setclip();
+	
+	Text score_text_1;
+	score_text_1.SetColor(Text::PINK);
+	int score_value_1 = 0;
+
+	Text score_text_2;
+	score_text_2.SetColor(Text::PINK);
+	int score_value_2 = 0;
+
 
 	Menu menu;
-
-	Tutorial _tutorial;
-
+	Menu _tutorial;
+	Menu winner;
+	
+	
 	bool quit = false;
 	int state=0;
 	enum STATE {
 		isPlaying = 1,
 		isGameover = 2,
 		isTutorial = 3,
+		isWin = 4,
 	};
 
 	int level = 1;
 
+	Mix_PlayMusic(menu_music, -1);
 	if (menu.loadMenu(gscreen, mainfont) == 0) {
-		Mix_PlayMusic(background_music, -1);
 		state = isTutorial;
 	}
 	if (menu.loadMenu(gscreen, mainfont) == QUIT) {
@@ -190,8 +211,9 @@ int main(int arcs, char* argv[]) {
 		if (state==isGameover)
 		{
 
+			Mix_PlayMusic(gameover_music, 1);
 			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
-
+				Mix_PlayMusic(background_music, -1);
 				string s = mllist->getHead()->mapfile;
 				const char* c = s.c_str();
 				game_map.LoadMap(c);
@@ -225,18 +247,29 @@ int main(int arcs, char* argv[]) {
 			}
 		}
 
-		else if (state==isTutorial)
+		else if (state == isTutorial)
 		{
-			if (_tutorial.loadTutorial(gscreen)==QUIT){
+			if (_tutorial.loadTutorial(gscreen) == QUIT){
                 quit = true;
             }
-            else if (_tutorial.loadTutorial(gscreen)==SPACE){
+            else if (_tutorial.loadTutorial(gscreen) == SPACE){
+            	Mix_PlayMusic(background_music, -1);
                 quit = false;
                 state = isPlaying;
             }
 		}
+		
+		else if (state == isWin )
+        {
+            Mix_PlayMusic(winner_music, 1);
+            if (winner.loadWinScreen(gscreen)==QUIT)
+            {
+                quit = true;
+            }
 
-		else if (state==isPlaying)
+        }
+
+		else if (state == isPlaying)
 		{
 			fps_timer.start();
 
@@ -283,7 +316,7 @@ int main(int arcs, char* argv[]) {
 			if (player1.checkNextLevelP1() == true && player2.checkNextLevelP2() == true) {
 
 				if(level<2) level += 1;
-                if(level==2)
+                else if(level==2)
                 {
                 player1.setPos(275, 662);
 				player2.setPos(275, 580);
@@ -295,14 +328,36 @@ int main(int arcs, char* argv[]) {
 				const char* v = s.c_str();
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);
+				else if (level > 2) state = isWin;
 
 			}
-			if (player1.GameOver1()==1||player2.GameOver2()==1){
+			if (player1.GameOver1() == 1||player2.GameOver2() == 1){
 				state = isGameover;
 			}
 
 			int real_time = fps_timer.get_tick();
 			int time_per_frame = 1000 / FPS;
+			
+			score_value_1 = player1.getScore1();
+
+			std::string val_str_score1 = std::to_string(score_value_1);
+            std::string strScore1("Score 1: ");
+            strScore1 += val_str_score1;
+
+            score_text_1.SetText(strScore1);
+            score_text_1.LoadFont(mainfont, gscreen);
+            score_text_1.RenderText(gscreen, 600, 250);
+
+            score_value_2 = player2.getScore2();
+
+			std::string val_str_score2 = std::to_string(score_value_2);
+            std::string strScore2("Score 2: ");
+            strScore2 += val_str_score2;
+
+            score_text_2.SetText(strScore2);
+            score_text_2.LoadFont(mainfont, gscreen);
+            score_text_2.RenderText(gscreen, 1000, 250);
+
 
 			SDL_RenderPresent(gscreen);
 			if (real_time < time_per_frame) {
@@ -314,6 +369,8 @@ int main(int arcs, char* argv[]) {
 		}
 	}
 	close();
+	score_text_1.Free();
+	score_text_2.Free();
 	KKgame.game_save(level);
 	return 0;
 }

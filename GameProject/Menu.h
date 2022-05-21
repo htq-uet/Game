@@ -8,6 +8,8 @@ public:
 	~Menu();
 	
 	int loadMenu(SDL_Renderer* renderer, TTF_Font* font);
+	int loadTutorial(SDL_Renderer* renderer);
+	int loadWinScreen(SDL_Renderer* renderer);
 	bool CheckFocusWithRect(const int& x, const int& y, const SDL_Rect& rect);
 
 private:

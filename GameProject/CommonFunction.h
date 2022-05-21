@@ -12,6 +12,10 @@ static SDL_Renderer* gscreen = NULL;
 static SDL_Event event;
 
 static Mix_Music* background_music;
+static Mix_Music* menu_music;
+static Mix_Music* gameover_music;
+static Mix_Music* winner_music;
+
 static Mix_Chunk* sound[50];
 
 
