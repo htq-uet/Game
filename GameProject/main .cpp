@@ -127,14 +127,13 @@ int main(int arcs, char* argv[]) {
 	player2.setPos(500, 662);
 
 	OtherObj cutemus;
-	cutemus.setPos(1400,640);
+	cutemus.setPos(230,480);
     cutemus.LoadImg("assets/mushroom.png", gscreen, 48);
 	cutemus.getNum(4);
 	cutemus.setclip();
 
 	OtherObj gate;
-	gate.setPos(225,195);
-	//gate.setPos(600,662);
+	gate.setPos(1440,225);
 	gate.LoadImg("assets/gate.png",gscreen, 32);
 	gate.getNum(14);
 	gate.setclip();
@@ -192,16 +191,28 @@ int main(int arcs, char* argv[]) {
 		{
 
 			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
-				SDL_RenderClear(gscreen);
+
 				string s = mllist->getHead()->mapfile;
 				const char* c = s.c_str();
 				game_map.LoadMap(c);
 				game_map.LoadTiles(gscreen);
-				player1.setPos(332, 662);
-				player2.setPos(332, 662);
+
 				player1.changeState();
 				player2.changeState();
-
+                if(level==1)
+                {
+				player1.setPos(332, 662);
+				player2.setPos(400, 662);
+				cutemus.setPos(230, 480);
+				gate.setPos(1440,225);
+				}
+				if(level==2)
+                {
+                player1.setPos(275, 662);
+				player2.setPos(275, 580);
+				cutemus.setPos(1400, 610);
+				gate.setPos(1440, 224);
+                }
 				state = isPlaying;
 
 			}
@@ -271,15 +282,20 @@ int main(int arcs, char* argv[]) {
 			game_map.DrawMap(gscreen);
 			if (player1.checkNextLevelP1() == true && player2.checkNextLevelP2() == true) {
 
-				level += 1;
-				string s = tmp->nextlevel->mapfile;
+				if(level<2) level += 1;
+                if(level==2)
+                {
+                player1.setPos(275, 662);
+				player2.setPos(275, 580);
+				cutemus.setPos(1400, 610);
+				gate.setPos(1440, 224);
+                }
+                mllist->nextNode();
+				string s = mllist->getHead()->mapfile;
 				const char* v = s.c_str();
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);
-				player1.setPos(332, 662);
-				player2.setPos(332, 662);
-				cutemus.setPos(662, 500);
-				gate.setPos(900, 662);
+
 			}
 			if (player1.GameOver1()==1||player2.GameOver2()==1){
 				state = isGameover;
