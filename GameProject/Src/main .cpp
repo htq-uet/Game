@@ -192,13 +192,14 @@ int main(int arcs, char* argv[]) {
 		quit = true;
 	}
 	if(menu.loadMenu(gscreen, mainfont) == 3)
-    {
+    {	
         Mix_PlayMusic(background_music, -1);
         KKgame.load_files();
         cout << KKgame.getLV();
         level = KKgame.getLV();
 		if(level == 1)
 		{
+			background1.Render(gscreen, NULL);
 			string b = mllist->getHead()->mapfile;
 			const char* v = b.c_str();
 			game_map.LoadMap(v);
@@ -207,6 +208,7 @@ int main(int arcs, char* argv[]) {
 		}
 		else if(level == 2)
 		{
+			background2.Render(gscreen,NULL);
 		    mllist->nextNode();
 			string b = mllist->getHead()->mapfile;
 			const char* v = b.c_str();
@@ -222,7 +224,6 @@ int main(int arcs, char* argv[]) {
 	while (!quit) {
 		if (state==isGameover)
 		{
-
 			Mix_PlayMusic(gameover_music, 1);
 			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
 				Mix_PlayMusic(background_music, -1);
@@ -233,19 +234,21 @@ int main(int arcs, char* argv[]) {
 
 				player1.changeState();
 				player2.changeState();
-                if(level==1)
+                if (level == 1)
                 {
-				player1.setPos(332, 662);
-				player2.setPos(400, 662);
-				cutemus.setPos(230, 480);
-				gate.setPos(1440,225);
+                	background1.Render(gscreen,NULL);
+					player1.setPos(332, 662);
+					player2.setPos(400, 662);
+					cutemus.setPos(230, 480);
+					gate.setPos(1440,225);
 				}
-				if(level==2)
+				if (level == 2)
                 {
-                player1.setPos(275, 662);
-				player2.setPos(275, 580);
-				cutemus.setPos(1400, 610);
-				gate.setPos(1440, 224);
+                	background2.Render(gscreen,NULL);
+                	player1.setPos(275, 662);
+					player2.setPos(275, 580);
+					cutemus.setPos(1400, 610);
+					gate.setPos(1440, 224);
                 }
 				state = isPlaying;
 
@@ -335,10 +338,11 @@ int main(int arcs, char* argv[]) {
 				if (level > 2) state = isWin;
                 if(level==2)
                 {
-                player1.setPos(275, 662);
-				player2.setPos(275, 580);
-				cutemus.setPos(1400, 610);
-				gate.setPos(1440, 224);
+                	background2.Render(gscreen,NULL);
+                	player1.setPos(275, 662);
+					player2.setPos(275, 580);
+					cutemus.setPos(1400, 610);
+					gate.setPos(1440, 224);
                 }
                 mllist->nextNode();
 				string s = mllist->getHead()->mapfile;
