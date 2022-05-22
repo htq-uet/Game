@@ -15,7 +15,10 @@
 #include <string>
 
 using namespace std;
-BaseObj background;
+
+BaseObj background1;
+BaseObj background2;
+
 TTF_Font *mainfont;
 Save_game KKgame;
 
@@ -66,12 +69,19 @@ bool init() {
 
 	return success;
 }
-bool LoadBackGround() {
-	bool ret = background.LoadImg("assets/background1.png",gscreen);
+bool LoadBackGround1() {
+	bool ret = background1.LoadImg("assets/lv1.png",gscreen);
 	return ret;
 }
+bool LoadBackGround2()
+{
+	bool ret = background2.LoadImg("assets/lv2.png",gscreen);
+	return ret;
+}
+
 void close() {
-	background.Free();
+	background1.Free();
+	background2.Free();
 	SDL_DestroyRenderer(gscreen);
 	gscreen = NULL;
 
@@ -110,7 +120,7 @@ int main(int arcs, char* argv[]) {
 	if (!init()) {
 		return -1;
 	}
-	if (LoadBackGround() == false) {
+	if (LoadBackGround1() == false||LoadBackGround2() == false) {
 		return -1;
 	}
 	Map_LinkedList* mllist = new Map_LinkedList();
@@ -150,11 +160,11 @@ int main(int arcs, char* argv[]) {
 	gate.setclip();
 
 	Text score_text_1;
-	score_text_1.SetColor(Text::PINK);
+	score_text_1.SetColor(Text::BLACK);
 	int score_value_1 = 0;
 
 	Text score_text_2;
-	score_text_2.SetColor(Text::PINK);
+	score_text_2.SetColor(Text::BLACK);
 	int score_value_2 = 0;
 
 
@@ -297,7 +307,9 @@ int main(int arcs, char* argv[]) {
 			SDL_SetRenderDrawColor(gscreen, 255, 255, 255, 255);
 			SDL_RenderClear(gscreen);
 
-			background.Render(gscreen, NULL);
+			if (level == 1) background1.Render(gscreen, NULL);
+            if (level == 2) background2.Render(gscreen,NULL);
+            
 			Map map_data = game_map.getMap();
 
             cutemus.show(gscreen);
