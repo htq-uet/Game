@@ -17,7 +17,7 @@ Player::Player()
 	input_type.stayleft = 0;
 	input_type.stayright = 0;
 	input_type.jump = 0;
-	
+
 	pinkfish1 = 0;
 	blackfish1=0;
 	pinkliquid1=0;
@@ -181,7 +181,7 @@ void Player::handleEvent1(SDL_Event e, SDL_Renderer* renderer, Mix_Chunk* sound[
 
 			break;
 		case SDLK_UP:
-			if (onground) {
+			if (onground ) {
 				Mix_PlayChannel(-1, sound[0], 0);
 				input_type.jump = 1;
 				input_type.stayleft = 0;
@@ -257,6 +257,7 @@ void Player::handleEvent2(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 				input_type.stayleft = 0;
 				input_type.stayright = 0;
 			}
+
 			break;
 		default:
 
@@ -295,6 +296,7 @@ void Player::handleEvent2(SDL_Event e,SDL_Renderer* renderer,Mix_Chunk* sound[5]
 			break;
 		}
 	}
+
 }
 //Manage the player's movement
 void Player::DoPlayer1(Map& mapdata, int p) {
@@ -320,6 +322,7 @@ void Player::DoPlayer1(Map& mapdata, int p) {
 	}
 
 	CheckToMap1(mapdata);
+	//CheckToFish(mapdata);
 
 }
 
@@ -347,6 +350,7 @@ void Player::DoPlayer2(Map& mapdata, int p) {
 	}
 
 	CheckToMap2(mapdata);
+	//CheckToFish(mapdata);
 
 }
 
@@ -437,7 +441,7 @@ void Player::CheckToMap1(Map& mapdata) {
 			}
 		}
 	}
-	
+
 	//check vertical
 	int width_min = widthframe*3< TILE_SIZE ? widthframe*3 : TILE_SIZE;
 	x1 = (xpos+25) / TILE_SIZE;
@@ -505,7 +509,7 @@ void Player::CheckToMap1(Map& mapdata) {
             }
 			else if (mapdata.tile[y1][x2] == BLACK_LIQUID&& mapdata.tile[y1][x1] == BLACK_LIQUID) gameoverState = 1;
 			else if (mapdata.tile[y1][x2] == POISON && mapdata.tile[y1][x1] == POISON) gameoverState = 1;
-			
+
 			else if (mapdata.tile[y1][x1] == PINK_LIQUID || mapdata.tile[y1][x2] == PINK_LIQUID)
 			{
 			}
@@ -825,9 +829,7 @@ void Player::CheckToMus(int p, OtherObj &mushroom) {
 			checkCollision = true;
 		}
 
-
-		//If none of the sides from A are outside B\
-	    true;
+		//If none of the sides from A are outside B\true;
 		if (checkCollision) {
 			if (xval > 0) {
 				xpos = x2 + 82;
@@ -950,4 +952,94 @@ void Player::CheckToGate(int p, OtherObj &gate_)
 		}
 	}
 }
+
+bool Player::isEating_fish(Map& mapdata) {
+	int x1 = 0;
+	int x2 = 0;
+	int y1 = 0;
+	int y2 = 0;
+	int height_min = (heightframe * 3 < TILE_SIZE ? heightframe * 3 : TILE_SIZE);
+
+	x1 = (xpos+xval+10)/TILE_SIZE;
+	x2 = (xpos + xval + widthframe*3 -10)/ TILE_SIZE;
+
+	y1 = (ypos+30) / TILE_SIZE;
+	y2 = (ypos + height_min +20) / TILE_SIZE;
+
+	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
+		if (xval > 0)
+		{
+            if (mapdata.tile[y1][x2] == PINK_FISH  || mapdata.tile[y1][x1] == PINK_FISH) {
+				isEatingFish = true;
+			}
+			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
+			{
+			    isEatingFish = true;
+			}
+			else
+            {
+                isEatingFish = false;
+            }
+
+		}
+		else if (xval < 0)
+		{
+
+			if (mapdata.tile[y1][x2] == PINK_FISH  || mapdata.tile[y1][x1] == PINK_FISH) {
+				isEatingFish = true;
+			}
+			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
+			{
+			    isEatingFish = true;
+			}
+			else
+            {
+                isEatingFish = false;
+            }
+
+	}
+	}
+
+	int width_min = widthframe*3< TILE_SIZE ? widthframe*3 : TILE_SIZE;
+	x1 = (xpos+25) / TILE_SIZE;
+	x2 = (xpos + width_min+40) / TILE_SIZE;
+
+	y1 = (ypos + yval) / TILE_SIZE;
+	y2 = (ypos + yval + heightframe*3 -17) / TILE_SIZE;
+
+	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
+		if (yval > 0) 
+		{
+			if (mapdata.tile[y1][x2] == PINK_FISH  || mapdata.tile[y1][x1] == PINK_FISH) {
+				isEatingFish = true;
+			}
+			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
+			{
+			    isEatingFish = true;
+			}
+			else
+            {
+                isEatingFish = false;
+            }
+
+		}
+		else if (yval < 0) 
+		{
+
+			if (mapdata.tile[y1][x2] == PINK_FISH  || mapdata.tile[y1][x1] == PINK_FISH) {
+				isEatingFish = true;
+			}
+			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
+			{
+			    isEatingFish = true;
+			}
+			else
+            {
+                isEatingFish = false;
+            }
+
+		}}
+		if(isEatingFish) Mix_PlayChannel(-1, sound[1], 0);
+		}
+
 

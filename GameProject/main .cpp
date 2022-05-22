@@ -56,14 +56,13 @@ bool init() {
 	menu_music = Mix_LoadMUS("sounds/menu.wav");
 	gameover_music = Mix_LoadMUS("sounds/gameover.wav");
 	winner_music = Mix_LoadMUS("sounds/win.wav");
-	
-	sound[0] = Mix_LoadWAV("sounds/jump.wav");
 
-	if (background_music==NULL||sound[0] == NULL|| menu_music == NULL || gameover_music == NULL||winner_music == NULL) {
+	sound[0] = Mix_LoadWAV("sounds/jump.wav");
+    sound[1] = Mix_LoadWAV("sounds/fish.wav");
+	if (background_music==NULL||sound[0] == NULL|| sound[0] == NULL || menu_music == NULL || gameover_music == NULL||winner_music == NULL ) {
 		cerr << "Sound Error!\n" << Mix_GetError();
 		success = false;
 	}
-
 
 	return success;
 }
@@ -90,6 +89,8 @@ void close() {
 	winner_music = NULL;
 	Mix_FreeChunk(sound[0]);
 	sound[0] = NULL;
+	Mix_FreeChunk(sound[1]);
+	sound[1] = NULL;
 	Mix_CloseAudio();
 
 	TTF_Quit();
@@ -147,7 +148,7 @@ int main(int arcs, char* argv[]) {
 	gate.LoadImg("assets/gate.png",gscreen, 32);
 	gate.getNum(14);
 	gate.setclip();
-	
+
 	Text score_text_1;
 	score_text_1.SetColor(Text::PINK);
 	int score_value_1 = 0;
@@ -160,8 +161,8 @@ int main(int arcs, char* argv[]) {
 	Menu menu;
 	Menu _tutorial;
 	Menu winner;
-	
-	
+
+
 	bool quit = false;
 	int state=0;
 	enum STATE {
@@ -182,7 +183,7 @@ int main(int arcs, char* argv[]) {
 	}
 	if(menu.loadMenu(gscreen, mainfont) == 3)
     {
-    	Mix_PlayMusic(background_music, -1);
+        Mix_PlayMusic(background_music, -1);
         KKgame.load_files();
         cout << KKgame.getLV();
         level = KKgame.getLV();
@@ -259,7 +260,7 @@ int main(int arcs, char* argv[]) {
                 state = isPlaying;
             }
 		}
-		
+
 		else if (state == isWin )
         {
             Mix_PlayMusic(winner_music, 1);
@@ -267,7 +268,6 @@ int main(int arcs, char* argv[]) {
             {
                 quit = true;
             }
-
         }
 
 		else if (state == isPlaying)
@@ -286,16 +286,18 @@ int main(int arcs, char* argv[]) {
 						break;
 					}
 				}
+
+
 				player1.changeState();
 				player2.changeState();
 				player1.handleEvent1(event, gscreen, sound);
 				player2.handleEvent2(event, gscreen, sound);
+
 			}
 			SDL_SetRenderDrawColor(gscreen, 255, 255, 255, 255);
 			SDL_RenderClear(gscreen);
 
 			background.Render(gscreen, NULL);
-
 			Map map_data = game_map.getMap();
 
             cutemus.show(gscreen);
@@ -305,12 +307,13 @@ int main(int arcs, char* argv[]) {
             player1.CheckToGate(0,gate);
             player1.CheckToMus(0, cutemus);
 			player1.show1(gscreen);
+            if(player1.isEating_fish(map_data)) Mix_PlayChannel(-1, sound[1], 0);
 
 			player2.DoPlayer2(map_data, 1);
             player2.CheckToGate(1,gate);
             player2.CheckToMus(1, cutemus);
 			player2.show2(gscreen);
-
+            if(player2.isEating_fish(map_data)) Mix_PlayChannel(-1, sound[1], 0);
 
 			game_map.SetMap(map_data);
 			game_map.DrawMap(gscreen);
@@ -330,7 +333,7 @@ int main(int arcs, char* argv[]) {
 				const char* v = s.c_str();
 				game_map.LoadMap(v);
 				game_map.LoadTiles(gscreen);
-				
+
 
 			}
 			if (player1.GameOver1() == 1||player2.GameOver2() == 1){
@@ -339,7 +342,7 @@ int main(int arcs, char* argv[]) {
 
 			int real_time = fps_timer.get_tick();
 			int time_per_frame = 1000 / FPS;
-			
+
 			score_value_1 = player1.getScore1();
 
 			std::string val_str_score1 = std::to_string(score_value_1);

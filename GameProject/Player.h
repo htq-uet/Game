@@ -50,7 +50,7 @@ public:
 	void UpdateImgPlayer1(SDL_Renderer* des);
 	void UpdateImgPlayer2(SDL_Renderer* des);
 
-	
+	bool isEating_fish(Map& mapdata);
 	void PinkFish_Player1();
 	void BlackFish_Player1();
 	void PinkLiquid_Player1();
@@ -60,8 +60,8 @@ public:
 	    score = pinkfish1 + blackfish1 + pinkliquid1;
 	    return score;
 	}
-	
-	
+
+
 	void PinkFish_Player2();
 	void BlackFish_Player2();
 	void BlackLiquid_Player2();
@@ -71,8 +71,8 @@ public:
 	    score = pinkfish2 + blackfish2 + blackliquid2;
 	    return score;
 	}
-	
-	
+
+
 	void setPos(float x,float y)
 	{
 		xpos = x;
@@ -88,9 +88,10 @@ public:
 	bool checkNextLevelP2() {
 		return nextLevelPlayer[1];
 	}
+
 	int GameOver1() { return gameoverState; }
 	int GameOver2() { return gameoverState; }
-	
+
 	void changeState() {
 		if (gameoverState == 1)
 		{
@@ -126,5 +127,6 @@ private:
 	int frame;
 	int status;
 	bool onground=false;
+	bool isEatingFish ;
 	int gameoverState=0;
 };
