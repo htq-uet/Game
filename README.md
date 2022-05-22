@@ -5,7 +5,8 @@ In this game, you have to take control two cats name Kit(the pink one) and Kat(t
 
 ## -MAKEFILE
 
-g++ -c *.cpp -w -m64 -I include -IC:/SDL2_ttf/x86_64-w64-mingw32/include/ -IC:/SDL2_ttf/x86_64-w64-mingw32/include/SDL2 -IC:/SDL2_mixer/x86_64-w64-mingw32/include/ -IC:/SDL2_mixer/x86_64-w64-mingw32/include/SDL2 -IC:/SDL2_image/x86_64-w64-mingw32/include/ -IC:/SDL2_image/x86_64-w64-mingw32/include/SDL2  -IC:/SDL2_mingw/include/ -IC:/SDL2_mingw/include/SDL2 && g++ *.o -o Run -s -L C:/SDL2_mingw/lib -L C:/SDL2_image/x86_64-w64-mingw32/lib -L C:/SDL2_mixer/x86_64-w64-mingw32/lib -L C:/SDL2_ttf/x86_64-w64-mingw32/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer  && start Run
++All:
+	g++ -c Src/*.cpp -w -m64 -I include -IC:/SDL2_ttf/x86_64-w64-mingw32/include/ -IC:/SDL2_ttf/x86_64-w64-mingw32/include/SDL2 -IC:/SDL2_mixer/x86_64-w64-mingw32/include/ -IC:/SDL2_mixer/x86_64-w64-mingw32/include/SDL2 -IC:/SDL2_image/x86_64-w64-mingw32/include/ -IC:/SDL2_image/x86_64-w64-mingw32/include/SDL2  -IC:/SDL2_mingw/include/ -IC:/SDL2_mingw/include/SDL2 && g++ *.o -o Run -s -L C:/SDL2_mingw/lib -L C:/SDL2_image/x86_64-w64-mingw32/lib -L C:/SDL2_mixer/x86_64-w64-mingw32/lib -L C:/SDL2_ttf/x86_64-w64-mingw32/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer  && start Run
 
 ## -Devision of work: <br />
 Create the main function of project, find assets, improve and add some small functions(Base Function, Text, Sound, FPS,..) : Together. <br />
