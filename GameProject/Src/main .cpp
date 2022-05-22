@@ -352,7 +352,7 @@ int main(int arcs, char* argv[]) {
 
 
 			}
-			if (player1.GameOver1() == 1||player2.GameOver2() == 1){
+			if (player1.GameOver1() == 1 || player2.GameOver2() == 1){
 				state = isGameover;
 			}
 
@@ -367,7 +367,7 @@ int main(int arcs, char* argv[]) {
 
             score_text_1.SetText(strScore1);
             score_text_1.LoadFont(mainfont, gscreen);
-            score_text_1.RenderText(gscreen, 600, 250);
+            score_text_1.RenderText(gscreen, 440, 110);
 
             score_value_2 = player2.getScore2();
 
@@ -377,7 +377,7 @@ int main(int arcs, char* argv[]) {
 
             score_text_2.SetText(strScore2);
             score_text_2.LoadFont(mainfont, gscreen);
-            score_text_2.RenderText(gscreen, 1000, 250);
+            score_text_2.RenderText(gscreen, 1050, 110);
 
 
 			SDL_RenderPresent(gscreen);

@@ -35,8 +35,8 @@ void ChangeColor(const int& index, const int& color, SDL_Renderer* renderer, TTF
 
 int Menu::loadMenu(SDL_Renderer* renderer, TTF_Font* font) {
 
-	BuildItemMenu(0, "- Click here to play game -", 597, 800, Text::BLACK, renderer, font);
-    BuildItemMenu(1, "Continue", 1200, 800, Text::BLACK, renderer, font);
+	BuildItemMenu(0, "- Click here to play game -", 597, 720, Text::BLACK, renderer, font);
+    BuildItemMenu(1, "- Continue- ", 730, 790, Text::BLACK, renderer, font);
 	int xm = 0;
 	int ym = 0;
 
@@ -46,8 +46,8 @@ int Menu::loadMenu(SDL_Renderer* renderer, TTF_Font* font) {
 		LoadImg("assets/menu.png", renderer);
 		SDL_Rect renderQuad = { xpos,ypos,1760,960};
 		SDL_RenderCopy(renderer, texture, NULL, &renderQuad);
-		text_menu[0].RenderText(renderer, 597,800);
-		text_menu[1].RenderText(renderer, 1200,800);
+		text_menu[0].RenderText(renderer, 597, 720);
+		text_menu[1].RenderText(renderer, 730, 790);
 		while (SDL_PollEvent (& mevent))
 		{
 
