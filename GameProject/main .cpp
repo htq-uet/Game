@@ -182,6 +182,7 @@ int main(int arcs, char* argv[]) {
 	}
 	if(menu.loadMenu(gscreen, mainfont) == 3)
     {
+    	Mix_PlayMusic(background_music, -1);
         KKgame.load_files();
         cout << KKgame.getLV();
         level = KKgame.getLV();
