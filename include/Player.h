@@ -5,7 +5,7 @@
 
 #define GRAVITY_SPEED 0.2
 #define MAX_FALL_SPEED 4
-#define PLAYER_SPEED 2.5
+#define PLAYER_SPEED 2
 #define BLANK_TILE 0
 #define JUMP_VAL 7
 #define PINK_FISH 5

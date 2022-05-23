@@ -620,12 +620,6 @@ void Player::CheckToMap2(Map& mapdata) {
 			else if (mapdata.tile[y2][x1] == PINK_LIQUID ) gameoverState = 1;
 			else if (mapdata.tile[y2][x1] == POISON ) gameoverState = 1;
 			else if (mapdata.tile[y2][x1] == BLACK_LIQUID ){}
-			else if (mapdata.tile[y2][x1] == PINK_FISH)
-            {
-                mapdata.tile[2][x1] = 0;
-				PinkFish_Player2();
-            }
-			
 			else {
 				if (mapdata.tile[y1][x1] != BLANK_TILE || mapdata.tile[y2][x1] != BLANK_TILE) {
 					xpos = (x1)*TILE_SIZE + 20;
@@ -664,14 +658,7 @@ void Player::CheckToMap2(Map& mapdata) {
 				BlackFish_Player2();
 
 			}
-			if (mapdata.tile[y2][x2] == BLACK_FISH) {
-				mapdata.tile[y2][x2] = 0;
-				BlackFish_Player2();
-			}
-			else if (mapdata.tile[y2][x1] == BLACK_FISH) {
-				mapdata.tile[y2][x1] = 0;
-				BlackFish_Player2();
-			}
+
 			
 			else if (mapdata.tile[y2][x2] == PINK_LIQUID || mapdata.tile[y2][x1] == PINK_LIQUID) gameoverState = 1;
 			else if (mapdata.tile[y2][x2] == POISON || mapdata.tile[y2][x1] == POISON) gameoverState = 1;
@@ -707,11 +694,6 @@ void Player::CheckToMap2(Map& mapdata) {
                 PinkFish_Player2();
             }
 			
-			else if (mapdata.tile[y1][x2] == PINK_FISH)
-            {
-                mapdata.tile[y1][x2] = 0;
-                PinkFish_Player2();
-            }
 			else if (mapdata.tile[y1][x1] == PINK_LIQUID || mapdata.tile[y1][x2] == PINK_LIQUID) gameoverState = 1;
 			else if (mapdata.tile[y1][x1] == POISON || mapdata.tile[y1][x2] == POISON) gameoverState = 1;
 			else if (mapdata.tile[y1][x1] == BLACK_LIQUID || mapdata.tile[y1][x2] == BLACK_LIQUID) {}
@@ -822,7 +804,7 @@ void Player::CheckToMus(int p, OtherObj &mushroom) {
 	//check horizontal
 	int height_min = (heightframe * 3 < TILE_SIZE ? heightframe * 3 : TILE_SIZE);
 
-	x1 = (xpos + xval + 30);
+	x1 = (xpos + xval + 0);
 	x2 = (xpos + xval + widthframe * 3 - 30);
 
 	y1 = (ypos + 20);
@@ -840,13 +822,13 @@ void Player::CheckToMus(int p, OtherObj &mushroom) {
 		//If none of the sides from A are outside B\true;
 		if (checkCollision) {
 			if (xval > 0) {
-				xpos = x2 + 82;
+				xpos = x2 + 80;
 				xpos -= widthframe * 3 + 56;
 				xval = 0;
 
 			}
 			else if (xval < 0) {
-				xpos = x1 - 26;
+				xpos = x1 + 7;
 				xval = 0;
 			}
 		}
@@ -976,10 +958,10 @@ bool Player::isEating_fish(Map& mapdata) {
 	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
 		if (xval > 0)
 		{
-            if (mapdata.tile[y1][x2] == PINK_FISH  || mapdata.tile[y1][x1] == PINK_FISH) {
+            if (mapdata.tile[y1][x2] == PINK_FISH  || mapdata.tile[y2][x2] == PINK_FISH) {
 				isEatingFish = true;
 			}
-			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
+			else if (mapdata.tile[y1][x2] == BLACK_FISH || mapdata.tile[y2][x2] == BLACK_FISH)
 			{
 			    isEatingFish = true;
 			}
@@ -992,10 +974,10 @@ bool Player::isEating_fish(Map& mapdata) {
 		else if (xval < 0)
 		{
 
-			if (mapdata.tile[y1][x2] == PINK_FISH  || mapdata.tile[y1][x1] == PINK_FISH) {
+			if (mapdata.tile[y2][x1] == PINK_FISH  || mapdata.tile[y1][x1] == PINK_FISH) {
 				isEatingFish = true;
 			}
-			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
+			else if (mapdata.tile[y2][x1] == BLACK_FISH || mapdata.tile[y1][x1] == BLACK_FISH)
 			{
 			    isEatingFish = true;
 			}
@@ -1003,8 +985,8 @@ bool Player::isEating_fish(Map& mapdata) {
             {
                 isEatingFish = false;
             }
-
-	}
+		}
+		if(isEatingFish) Mix_PlayChannel(1, sound[1], 0);
 	}
 
 	int width_min = widthframe*3< TILE_SIZE ? widthframe*3 : TILE_SIZE;
@@ -1017,10 +999,10 @@ bool Player::isEating_fish(Map& mapdata) {
 	if (x1 >= 0 && x2 < MAP_MAP_X && y1 >= 0 && y2 < MAP_MAP_Y) {
 		if (yval > 0) 
 		{
-			if (mapdata.tile[y1][x2] == PINK_FISH  || mapdata.tile[y1][x1] == PINK_FISH) {
+			if (mapdata.tile[y2][x2] == PINK_FISH  || mapdata.tile[y2][x1] == PINK_FISH) {
 				isEatingFish = true;
 			}
-			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
+			else if (mapdata.tile[y2][x1] == BLACK_FISH || mapdata.tile[y2][x2] == BLACK_FISH)
 			{
 			    isEatingFish = true;
 			}
@@ -1033,7 +1015,7 @@ bool Player::isEating_fish(Map& mapdata) {
 		else if (yval < 0) 
 		{
 
-			if (mapdata.tile[y1][x2] == PINK_FISH  || mapdata.tile[y1][x1] == PINK_FISH) {
+			if (mapdata.tile[y1][x1] == PINK_FISH  || mapdata.tile[y1][x2] == PINK_FISH) {
 				isEatingFish = true;
 			}
 			else if (mapdata.tile[y1][x1] == BLACK_FISH || mapdata.tile[y1][x2] == BLACK_FISH)
@@ -1046,6 +1028,7 @@ bool Player::isEating_fish(Map& mapdata) {
             }
 
 		}
-		if(isEatingFish) Mix_PlayChannel(-1, sound[1], 0);
+		if(isEatingFish) Mix_PlayChannel(1, sound[1], 0);
 	}
+	return isEatingFish;
 }

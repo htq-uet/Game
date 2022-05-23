@@ -167,26 +167,9 @@ int main(int arcs, char* argv[]) {
 	score_text_2.SetColor(Text::BLACK);
 	int score_value_2 = 0;
 
-	score_value_1 = player1.getScore1();
-
-	std::string val_str_score1 = std::to_string(score_value_1);
-    std::string strScore1("Score 1: ");
-    strScore1 += val_str_score1;
-
-    score_text_1.SetText(strScore1);
     score_text_1.LoadFont(mainfont, gscreen);
 
-    
-			
-
-
-    score_value_2 = player2.getScore2();
-
-	std::string val_str_score2 = std::to_string(score_value_2);
-    std::string strScore2("Score 2: ");
-    strScore2 += val_str_score2;
-
-    score_text_2.SetText(strScore2);
+    score_text_2.SetText("Score 2: 0");
     score_text_2.LoadFont(mainfont, gscreen);
     
 			
@@ -259,17 +242,8 @@ int main(int arcs, char* argv[]) {
 			
 			Mix_PlayMusic(gameover_music, 1);
 			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
-
-				score_value_1=0;
-				score_value_2=0;
-
 				player1.resetPoint();
 				player2.resetPoint();
-
-			}
-			Mix_PlayMusic(gameover_music, 1);
-			if (_gameover.loadGameOver(gscreen, mainfont)==0) {
-
 				Mix_PlayMusic(background_music, -1);
 				string s = mllist->getHead()->mapfile;
 				const char* c = s.c_str();
@@ -320,6 +294,7 @@ int main(int arcs, char* argv[]) {
 		else if (state == isWin )
         {
             Mix_PlayMusic(winner_music, 1);
+			winner.loadWinScreen(gscreen);
             if (winner.loadWinScreen(gscreen)==QUIT)
             {
                 quit = true;
@@ -377,7 +352,7 @@ int main(int arcs, char* argv[]) {
 			game_map.DrawMap(gscreen);
 			if (player1.checkNextLevelP1() == true && player2.checkNextLevelP2() == true) {
 
-
+				level+=1;
 				score_value_1=0;
 				score_value_2=0;
 
@@ -385,8 +360,13 @@ int main(int arcs, char* argv[]) {
 				player2.resetPoint();
 
 
-				if(level<2) level += 1;
-				if (level > 2) state = isWin;
+				//if(level<2) level += 1;
+				if (level > 2) 
+				{
+					level--;
+					state = isWin;
+					
+				}
                 if(level==2)
                 {
                 	background2.Render(gscreen,NULL);
@@ -405,18 +385,35 @@ int main(int arcs, char* argv[]) {
 			}
 			if (player1.GameOver1() == 1 || player2.GameOver2() == 1){
 				state = isGameover;
-
-				score_value_1=0;
-				score_value_2=0;
-
-				player1.resetPoint();
-				player2.resetPoint();
-
 			}
 
 			int real_time = fps_timer.get_tick();
 			int time_per_frame = 1000 / FPS;
+			
 
+			int score_value_2 = 0;
+
+			score_value_1 = player1.getScore1();
+
+			std::string val_str_score1 = std::to_string(score_value_1);
+   			std::string strScore1("Score 1: ");
+    		strScore1 += val_str_score1;
+
+    		score_text_1.SetText(strScore1);
+    		score_text_1.LoadFont(mainfont, gscreen);
+
+    
+			
+
+
+    		score_value_2 = player2.getScore2();
+
+			std::string val_str_score2 = std::to_string(score_value_2);
+    		std::string strScore2("Score 2: ");
+    		strScore2 += val_str_score2;
+
+    		score_text_2.SetText(strScore2);
+    		score_text_2.LoadFont(mainfont, gscreen);
 			score_text_1.RenderText(gscreen, 440, 55);
 			score_text_2.RenderText(gscreen, 1050, 55);
 
@@ -427,6 +424,8 @@ int main(int arcs, char* argv[]) {
 					SDL_Delay(delay);
 				}
 			}
+			score_text_1.Free();
+			score_text_2.Free();
 		}
 	}
 	close();
